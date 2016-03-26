@@ -1,13 +1,26 @@
 package skeleton;
 
 public class Wall extends Cell implements Interactable{
+	private boolean _isPassable;
+
+	public boolean getPassable() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void setPassable(boolean aB) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void Interact(Player aPlayer) {
+		throw new UnsupportedOperationException();
+	}
 
 	@Override
-	public void Interact() {
-		Scheduler.Print("A játékos falnak ment.");
+	public void interact(Player aPlayer) {
+		Scheduler.Print("A jatekos falnak ment.");
 	}
-	
-	public void ShootWithPortal() {
-		Scheduler.Print("A falat meglõtték egy portallal, nem volt hatásos.");
+
+	public void shootWithPortal() {
+		Scheduler.Print("A falat meglottuk egy portallal, nem volt hatasos.");
 	}
 }

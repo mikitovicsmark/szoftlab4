@@ -2,20 +2,23 @@ package skeleton;
 
 public class Door extends Wall{
 	@Override
-	public void Interact() {
-		super.Interact();
-		Scheduler.Print("Egy nyitott ajtóban áll.");	
+	public void interact(Player aPlayer) {
+		super.Interact(aPlayer);
+		Scheduler.Print("Egy nyitott ajtoban all.");
 	}
-	public void Open() {	
-		Scheduler.Print("Az ajtó kinyílt.");
+	public void open() {
+		Scheduler.Print("Az ajto kinyilt.");
+	}
+	public void close() {
+		throw new UnsupportedOperationException();
 	}
 	@Override
-	public void ShootWithPortal() {
-		Scheduler.Print("Az ajtót meglõtték egy portallal, nem volt hatásos.");
+	public void shootWithPortal() {
+		Scheduler.Print("Az ajtot meglottek egy portallal, nem volt hatasos.");
 	}
-	public void ShootThroughPortal(String dir, Wall wall) {
-		Scheduler.Print("A játékos kilõtt "+ dir +" egy portalt.");
-		Scheduler.Print("Az ajtón átrepült a portal.");
-		wall.ShootWithPortal();
+	public void shootThroughPortal(String dir, Wall wall) {
+		Scheduler.Print("A jatekos kilott "+ dir +" egy portalt.");
+		Scheduler.Print("Az ajton atrepult a portal.");
+		wall.shootWithPortal();
 	}
 }
