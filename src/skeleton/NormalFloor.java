@@ -10,14 +10,10 @@ public class NormalFloor extends Cell implements Interactable {
 	}
 
 	public void putDownBox() {
-		throw new UnsupportedOperationException();
-	}
-
-	public void Interact() {
-		throw new UnsupportedOperationException();
+		Scheduler.Print("Sima foldre lerakja a dobozt.");
 	}
 
 	public void interact() {
-		throw new UnsupportedOperationException();
+		Scheduler.Print("Felveszi az ott lévõ dobozt vagy ZPM-et.");
 	}
 }

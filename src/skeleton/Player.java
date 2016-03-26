@@ -19,4 +19,10 @@ public class Player extends Move {
 	public <W extends Wall> void shootPortalThroughDoor(Door door, String dir, W wall) {
 		door.shootThroughPortal(dir, wall);
 	}
+	
+	public <N extends NormalFloor> void putDownBox(N normalFloor) {
+		Scheduler.Print("A jatekos lerakja a dobozt");
+		normalFloor.putDownBox();
+	}
+	
 }

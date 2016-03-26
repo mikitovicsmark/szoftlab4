@@ -3,7 +3,6 @@ package skeleton;
 public class Door extends Wall{
 	@Override
 	public void interact() {
-		super.interact();
 		Scheduler.Print("Egy nyitott ajtoban all.");
 	}
 	public void open() {

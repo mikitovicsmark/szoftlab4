@@ -4,9 +4,10 @@ public class Switch extends NormalFloor{
 	public Box pickUpBox() {
 		throw new UnsupportedOperationException();
 	}
-
-	public void putDownBox(Box aB) {
-		throw new UnsupportedOperationException();
+	
+	@Override
+	public void putDownBox() {
+		Scheduler.Print("Egy kapcsolra lerakja a dobozt");
 	}
 
 	public void interact() {
