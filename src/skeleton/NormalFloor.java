@@ -14,6 +14,6 @@ public class NormalFloor extends Cell implements Interactable {
 	}
 
 	public void interact() {
-		Scheduler.Print("Felveszi az ott lévõ dobozt vagy ZPM-et.");
+		Scheduler.Print("Felveszi az ott levo dobozt vagy ZPM-et.");
 	}
 }

@@ -7,7 +7,7 @@ public class Switch extends NormalFloor{
 	
 	@Override
 	public void putDownBox() {
-		Scheduler.Print("Egy kapcsolra lerakja a dobozt");
+		Scheduler.Print("Egy kapcsolora lerakja a dobozt");
 	}
 
 	public void interact() {
