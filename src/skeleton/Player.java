@@ -25,4 +25,9 @@ public class Player extends Move {
 		normalFloor.putDownBox();
 	}
 	
+	public <N extends NormalFloor> void pickUpBox(N normalFloor) {
+		Scheduler.Print("A jatekos felveszi a dobozt");
+		normalFloor.pickUpBox();
+	}
+	
 }

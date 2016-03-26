@@ -26,7 +26,7 @@ public class Skeleton {
 	//Switchre lépés -> ajtó kinyitása -> portal átlövése
 	public static void SkeletonCase1() {
 		Player player = new Player();
-		player.moveTo("felfele", new Cell());
+		player.moveTo("felfele", new NormalFloor());
 		player.moveTo("jobbra", new Switch());
 		player.shootPortalThroughDoor(new Door(), "jobbra", new SpecialWall());
 	}
@@ -34,8 +34,10 @@ public class Skeleton {
 	//Doboz felvétele, Switchre helyezése, majd áthaladás a kinyílt ajtón
 	private static void SkeletonCase6() {
 		Player player = new Player();
-		player.moveTo("balra", new Cell());
-		player.moveTo("lefele", new NormalFloor());
+		player.moveTo("balra", new NormalFloor());
+		NormalFloor nf = new NormalFloor();
+		player.moveTo("lefele", nf);
+		player.pickUpBox(nf);
 		Switch mySwitch = new Switch();
 		player.moveTo("felfele", mySwitch);
 		player.putDownBox(mySwitch);

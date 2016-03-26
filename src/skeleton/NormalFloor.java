@@ -6,7 +6,8 @@ public class NormalFloor extends Cell implements Interactable {
 	}
 
 	public Box pickUpBox() {
-		throw new UnsupportedOperationException();
+		Scheduler.Print("A jatekos felveszi a dobozta a normal floor-rol");
+		return new Box();
 	}
 
 	public void putDownBox() {
@@ -14,6 +15,6 @@ public class NormalFloor extends Cell implements Interactable {
 	}
 
 	public void interact() {
-		Scheduler.Print("Felveszi az ott levo dobozt vagy ZPM-et.");
+		Scheduler.Print("A jatekos normalFloor-ra lepett.");
 	}
 }
