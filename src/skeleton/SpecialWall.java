@@ -1,18 +1,7 @@
 package skeleton;
 
 public class SpecialWall extends Wall {
-	private Portal _portal;
-	public Portal _unnamed_Portal_;
-
-	public Portal getPortal() {
-		return this._portal;
-	}
-
-	public void setPortal(Portal aP) {
-		this._portal = aP;
-	}
-
-	public void interact(Player aPlayer) {
+	public void interact() {
 		throw new UnsupportedOperationException();
 	}
 	

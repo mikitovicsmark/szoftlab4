@@ -2,7 +2,7 @@ package skeleton;
 
 public class Move {
 
-	public void moveTo(int aX, int aY) {
+	public void moveTo() {
 		throw new UnsupportedOperationException();
 	}
 }

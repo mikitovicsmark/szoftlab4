@@ -2,7 +2,7 @@ package skeleton;
 
 public class Pit extends NormalFloor {
 
-	public void Interact(Player aPlayer) {
+	public void Interact() {
 		throw new UnsupportedOperationException();
 	}
 }

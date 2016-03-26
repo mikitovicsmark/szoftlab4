@@ -3,7 +3,7 @@ package skeleton;
 public class Player extends Move {
 	public <I extends Interactable> void moveTo(String dir, I interactable ) {
 		Scheduler.Print("A jatekos "+ dir + " lepett.");
-		interactable.interact(this);
+		interactable.interact();
 	}
 
 	public <W extends Wall> void shootYellowPortal(String dir, W wall) {

@@ -1,10 +1,6 @@
 package skeleton;
 
 public class NormalFloor extends Cell implements Interactable {
-	private Zpm _zpm;
-	private Box _box;
-	public Zpm _unnamed_Zpm_;
-
 	public Zpm pickUpZPM() {
 		throw new UnsupportedOperationException();
 	}
@@ -13,15 +9,15 @@ public class NormalFloor extends Cell implements Interactable {
 		throw new UnsupportedOperationException();
 	}
 
-	public void putDownBox(Box aB) {
+	public void putDownBox() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void Interact(Player aPlayer) {
+	public void Interact() {
 		throw new UnsupportedOperationException();
 	}
 
-	public void interact(Player aPlayer) {
+	public void interact() {
 		throw new UnsupportedOperationException();
 	}
 }
