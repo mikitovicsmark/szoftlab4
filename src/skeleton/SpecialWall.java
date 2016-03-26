@@ -1,9 +1,12 @@
 package skeleton;
 
-public class SpecialWall extends Wall{
+public class SpecialWall extends Wall {
+	public void interact() {
+		throw new UnsupportedOperationException();
+	}
 	
 	@Override
-	public void ShootWithPortal() {
-		Scheduler.Print("A falat meglõtték egy portallal, kapu nyílt rajta.");
+	public void shootWithPortal() {
+		Scheduler.Print("A falat meglottuk egy portallal, kapu nyilt rajta.");
 	}
 }

@@ -24,9 +24,9 @@ public class Skeleton {
 	//Switchre lépés -> ajtó kinyitása -> portal átlövése
 	public static void SkeletonCase1() {
 		Player player = new Player();
-		player.moveTo("felfelé", new Cell());
+		player.moveTo("felfele", new Cell());
 		player.moveTo("jobbra", new Switch());
-		player.ShootPortalThroughDoor(new Door(), "jobbra", new SpecialWall());
+		player.shootPortalThroughDoor(new Door(), "jobbra", new SpecialWall());
 	}
 
 }

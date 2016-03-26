@@ -1,22 +1,22 @@
 package skeleton;
 
-public class Player {
+public class Player extends Move {
 	public <I extends Interactable> void moveTo(String dir, I interactable ) {
-		Scheduler.Print("A játékos "+ dir + " lépett.");
-		interactable.Interact();	
+		Scheduler.Print("A jatekos "+ dir + " lepett.");
+		interactable.interact();
 	}
-	
-	public <W extends Wall> void ShootYellowPortal(String dir, W wall) {
-		Scheduler.Print("A játékos "+ dir +" kilõtt egy Sárga portalt.");
-		wall.ShootWithPortal();
+
+	public <W extends Wall> void shootYellowPortal(String dir, W wall) {
+		Scheduler.Print("A jatekos "+ dir +" kilott egy Sarga portalt.");
+		wall.shootWithPortal();
 	}
-	
-	public <W extends Wall> void ShootBluePortal(String dir, W wall) {
-		Scheduler.Print("A játékos "+ dir +" kilõtt egy Kék portalt.");
-		wall.ShootWithPortal();
+
+	public <W extends Wall> void shootBluePortal(String dir, W wall) {
+		Scheduler.Print("A jatekos "+ dir +" kilott egy Kek portalt.");
+		wall.shootWithPortal();
 	}
-	
-	public <W extends Wall>void ShootPortalThroughDoor(Door door, String dir, W wall) {
-		door.ShootThroughPortal(dir, wall);
+
+	public <W extends Wall> void shootPortalThroughDoor(Door door, String dir, W wall) {
+		door.shootThroughPortal(dir, wall);
 	}
 }
