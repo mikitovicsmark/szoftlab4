@@ -6,7 +6,7 @@ public class Wall extends Cell implements Interactable{
 		Scheduler.Print("A jatekos falnak ment.");
 	}
 
-	public void shootWithPortal() {
+	public void shootWithPortal(Portal p) {
 		Scheduler.Print("A falat meglottuk egy portallal, nem volt hatasos.");
 	}
 }

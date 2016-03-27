@@ -5,7 +5,24 @@ public class Portal {
 		throw new UnsupportedOperationException();
 	}
 
-	public void setDestinationPortal() {
-		throw new UnsupportedOperationException();
+	public void setDestinationPortal(Portal p) {
+		Scheduler.Print("A portal célállomása a másik portalra lett állítva");
+	}
+	public void setDirection(Direction dir){
+		switch(dir){
+		case LEFT: Scheduler.Print("A portal a fal keleti oldalán");
+		break;
+		case RIGHT: Scheduler.Print("A portal a fal nyugati oldalán");
+		break;
+		case UP: Scheduler.Print("A portal a fal déli oldalán");
+		break;
+		case DOWN: Scheduler.Print("A portal a fal északi oldalán");
+		break;
+		}
+
+	}
+	public Portal getDestination(){
+		Scheduler.Print("Az Portal megadja célállomásának koordinátáit");
+		return new Portal();
 	}
 }
