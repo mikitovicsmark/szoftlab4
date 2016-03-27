@@ -34,6 +34,7 @@ public class Skeleton {
 		player.moveTo(Direction.LEFT, new NormalFloor());
 		if (sw.getPassable())
 			sw.interact(player);
+		player.putDownBox(new NormalFloor());
 		
 		
 	}
@@ -75,7 +76,7 @@ public class Skeleton {
 		player.moveTo(Direction.LEFT, new NormalFloor());
 		if (sw1.getPassable())
 			sw1.interact(player);
-		player.putDownBox(new NormalFloor());
+
 	
 	}
 
