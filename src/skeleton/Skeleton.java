@@ -15,7 +15,7 @@ public class Skeleton {
 						break;
 				case "6": SkeletonCase6();
 						break;
-				case "3": System.out.println("Rakjatok be case-eket.");
+				case "3": SkeletonCase3();
 						break;
 				case "close": exit=true;
 						break;
@@ -23,6 +23,19 @@ public class Skeleton {
 		}
 		scanner.close();
 		System.out.println("Skeleton closed");
+	}
+
+	public static void SkeletonCase3() {
+		Player player = new Player();
+		SpecialWall sw = new SpecialWall();
+		player.moveTo(Direction.UP, new NormalFloor());
+		player.pickUpBox(new NormalFloor());
+		player.moveTo(Direction.DOWN, new NormalFloor());
+		player.moveTo(Direction.LEFT, new NormalFloor());
+		if (sw.getPassable())
+			sw.interact(player);
+		
+		
 	}
 
 	//Switchre lépés -> ajtó kinyitása -> portal átlövése
@@ -62,6 +75,7 @@ public class Skeleton {
 		player.moveTo(Direction.LEFT, new NormalFloor());
 		if (sw1.getPassable())
 			sw1.interact(player);
+		player.putDownBox(new NormalFloor());
 	
 	}
 

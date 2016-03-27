@@ -22,7 +22,7 @@ public class Portal {
 
 	}
 	public Portal getDestination(){
-		Scheduler.Print("Az Portal megadja célállomásának koordinátáit");
+		Scheduler.Print("A Portal megadja célállomásának koordinátáit");
 		return new Portal();
 	}
 }
