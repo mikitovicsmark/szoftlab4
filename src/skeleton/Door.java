@@ -15,7 +15,7 @@ public class Door extends Wall{
 	public void shootWithPortal() {
 		Scheduler.Print("Az ajtot meglottek egy portallal, nem volt hatasos.");
 	}
-	public void shootThroughPortal(String dir, Wall wall) {
+	public void shootThroughPortal(Direction dir, Wall wall) {
 		Scheduler.Print("A jatekos kilott "+ dir +" egy portalt.");
 		Scheduler.Print("Az ajton atrepult a portal.");
 		wall.shootWithPortal();
