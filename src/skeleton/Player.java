@@ -8,12 +8,22 @@ public class Player extends Move {
 
 	public <W extends Wall> void shootYellowPortal(Direction dir, W wall) {
 		Scheduler.Print("A jatekos "+ dir +" iranyba kilott egy Sarga portalt.");
-		wall.shootWithPortal();
-	}
+		Portal py = new Portal();
+		wall.shootWithPortal(py);
+		py.setDirection(dir);
+		if (wall instanceof SpecialWall)
+		((SpecialWall) wall).setPortal(new Portal());
+		new Portal().setDestinationPortal(py);
+		py.setDestinationPortal(py);
+		}
 
 	public <W extends Wall> void shootBluePortal(Direction dir, W wall) {
 		Scheduler.Print("A jatekos "+ dir +" iranyba kilott egy Kek portalt.");
-		wall.shootWithPortal();
+		Portal pb = new Portal();
+		wall.shootWithPortal(pb);
+		pb.setDirection(dir);
+		if (wall instanceof SpecialWall)
+		((SpecialWall) wall).setPortal(new Portal());
 	}
 
 	public <W extends Wall> void shootPortalThroughDoor(Door door, Direction dir, W wall) {

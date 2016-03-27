@@ -50,18 +50,12 @@ public class Skeleton {
 		SpecialWall sw1 = new SpecialWall();
 		SpecialWall sw2 = new SpecialWall();
 		player.shootBluePortal(Direction.RIGHT, sw1);
-		Portal pb = new Portal();
-		pb.setDirection(Direction.LEFT);
-		sw1.setPortal(pb);
 		
 		player.moveTo(Direction.DOWN, new NormalFloor());
-		player.shootYellowPortal(Direction.UP, sw2);
-		Portal py = new Portal();
-		py.setDirection(Direction.DOWN);
-		sw2.setPortal(py);
 		
-		pb.setDestinationPortal(py);
-		py.setDestinationPortal(py);
+		player.shootYellowPortal(Direction.UP, sw2);
+		
+
 		sw1.setPassable(true);
 		sw2.setPassable(true);
 		
