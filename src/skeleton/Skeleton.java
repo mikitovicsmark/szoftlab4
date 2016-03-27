@@ -15,7 +15,7 @@ public class Skeleton {
 						break;
 				case "6": SkeletonCase6();
 						break;
-				case "3": System.out.println("Rakjatok be case-eket.");
+				case "3": SkeletonCase3();
 						break;
 				case "close": exit=true;
 						break;
@@ -24,7 +24,19 @@ public class Skeleton {
 		scanner.close();
 		System.out.println("Skeleton closed");
 	}
-
+	//Doboz felvétele -> átsétálás a portalon -> doboz lerakása
+	public static void SkeletonCase3() {
+		Player player = new Player();
+		SpecialWall sw = new SpecialWall();
+		player.moveTo(Direction.UP, new NormalFloor());
+		player.pickUpBox(new NormalFloor());
+		player.moveTo(Direction.DOWN, new NormalFloor());
+		player.moveTo(Direction.LEFT, new NormalFloor());
+		if (sw.getPassable())
+			sw.interact(player);
+		player.putDownBox(new NormalFloor());
+	}
+	
 	//Switchre lépés -> ajtó kinyitása -> portal átlövése
 	public static void SkeletonCase1() {
 		Player player = new Player();
@@ -45,24 +57,18 @@ public class Skeleton {
 		player.putDownBox(mySwitch);
 		player.moveTo(Direction.UP, new Door());
 	}
+	//Kék portál lövése -> Sárga portal lövése -> áthaladás a portalon 
 	private static void SkeletonCase5(){
 		Player player = new Player();
 		SpecialWall sw1 = new SpecialWall();
 		SpecialWall sw2 = new SpecialWall();
 		player.shootBluePortal(Direction.RIGHT, sw1);
-		
 		player.moveTo(Direction.DOWN, new NormalFloor());
-		
 		player.shootYellowPortal(Direction.UP, sw2);
-		
-
 		sw1.setPassable(true);
 		sw2.setPassable(true);
-		
 		player.moveTo(Direction.LEFT, new NormalFloor());
 		if (sw1.getPassable())
 			sw1.interact(player);
-	
 	}
-
 }
