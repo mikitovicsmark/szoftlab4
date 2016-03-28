@@ -2,7 +2,11 @@ package skeleton;
 
 public class NormalFloor extends Cell implements Interactable {
 	public Zpm pickUpZPM() {
-		throw new UnsupportedOperationException();
+		Scheduler.Print("A jatekos felveszi a ZPM-et");
+		Zpm zpm = new Zpm();
+		zpm.interact();
+		
+		return new Zpm();
 	}
 
 	public Box pickUpBox() {

@@ -40,4 +40,9 @@ public class Player extends Move {
 		normalFloor.pickUpBox();
 	}
 	
+	public <N extends NormalFloor> void pickUpZpm(N normalFloor){
+		Scheduler.Print("A jatekos felvenni keszul a ZPM-et.");
+		normalFloor.pickUpZPM();
+	}
+	
 }

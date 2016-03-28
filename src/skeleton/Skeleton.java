@@ -11,12 +11,15 @@ public class Skeleton {
 			switch (scanner.next()) {
 				case "1": SkeletonCase1();
 						break;
+				case "2": SkeletonCase2();
+						break;
+				case "3": SkeletonCase3();
+						break;
 				case "5": SkeletonCase5();
 						break;
 				case "6": SkeletonCase6();
 						break;
-				case "3": SkeletonCase3();
-						break;
+				
 				case "close": exit=true;
 						break;
 			}
@@ -70,5 +73,20 @@ public class Skeleton {
 		player.moveTo(Direction.LEFT, new NormalFloor());
 		if (sw1.getPassable())
 			sw1.interact(player);
+	}
+	//ZPM felvetele.
+	private static void SkeletonCase2(){
+		Player ONeil = new Player();
+		
+		NormalFloor nf1 = new NormalFloor();
+		ONeil.moveTo(Direction.DOWN, nf1);
+		
+		NormalFloor nf2 = new NormalFloor();
+		ONeil.moveTo(Direction.DOWN, nf2);
+		
+		NormalFloor nf3 = new NormalFloor();
+		ONeil.moveTo(Direction.LEFT, nf3);
+		ONeil.pickUpZpm(nf3);
+	
 	}
 }
