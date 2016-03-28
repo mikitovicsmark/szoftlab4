@@ -7,7 +7,7 @@ public class Skeleton {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		boolean exit = false;
-		System.out.println("Válasz egy use caset");
+		System.out.println("Valassz egy use caset");
 		while (scanner.hasNext() && !exit) {
 			switch (scanner.next()) {
 				case "1": SkeletonCase1();
