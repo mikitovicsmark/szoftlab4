@@ -7,6 +7,7 @@ public class Skeleton {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		boolean exit = false;
+		System.out.println("Válasz egy use caset");
 		while (scanner.hasNext() && !exit) {
 			switch (scanner.next()) {
 				case "1": SkeletonCase1();
@@ -19,7 +20,10 @@ public class Skeleton {
 						break;
 				case "6": SkeletonCase6();
 						break;
-				
+				case "7": SkeletonCase7();
+					break;
+				case "8": SkeletonCase8();
+					break;
 				case "close": exit=true;
 						break;
 			}
@@ -88,5 +92,18 @@ public class Skeleton {
 		ONeil.moveTo(Direction.LEFT, nf3);
 		ONeil.pickUpZpm(nf3);
 	
+	}
+	//Player szakadékra lépése és halála
+	private static void SkeletonCase7(){
+		Player player = new Player();
+		Pit pit = new Pit();
+		pit.Interact(player);
+	}
+	
+	//A játékos felvett minden zpmet és rálép az exit mezõre.
+	private static void SkeletonCase8(){
+		Player player = new Player();
+		Exit exit = new Exit();
+		exit.Interact(player);
 	}
 }
