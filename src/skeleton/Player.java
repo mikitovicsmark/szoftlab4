@@ -45,4 +45,13 @@ public class Player extends Move {
 		normalFloor.pickUpZPM();
 	}
 	
+	public int getZpmCount(){
+		Scheduler.Print("A játékos felvett minden zpmet");
+		return 0;
+	}
+	
+	public void die(){
+		Scheduler.Print("A jatekos meghalt");
+	}
+	
 }
