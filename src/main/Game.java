@@ -16,7 +16,6 @@ public class Game {
 
 			int playerX = gameField.getPlayer().getPosition().getX();
 			int playerY = gameField.getPlayer().getPosition().getY();
-			// System.out.println("playerX :"+playerX+" playerY :"+playerY);
 			switch (scanner.next()) {
 			case "q":
 				gameField.getPlayer().shootFirstPortal(Color.BLUE);
@@ -31,7 +30,7 @@ public class Game {
 				break;
 			case "a":
 				if (playerX > 0) {
-					gameField.getPlayer().moveTo(gameField.getCell(playerX - 1, playerY), Direction.RIGHT);
+					gameField.getPlayer().moveTo(gameField.getCell(playerX - 1, playerY), Direction.LEFT);
 				}
 				break;
 			case "w":
@@ -41,7 +40,7 @@ public class Game {
 				break;
 			case "d":
 				if (playerX < gameField.getWidth() - 1) {
-					gameField.getPlayer().moveTo(gameField.getCell(playerX + 1, playerY), Direction.LEFT);
+					gameField.getPlayer().moveTo(gameField.getCell(playerX + 1, playerY), Direction.RIGHT);
 				}
 				break;
 			}

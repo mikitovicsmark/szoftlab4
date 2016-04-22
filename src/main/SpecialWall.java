@@ -22,15 +22,25 @@ public class SpecialWall extends Wall {
 	public SpecialWall(int x, int y) {
 		super(x, y);
 		this.setImage('L');
+		this.setPassable(false);
 		portal = null;
 	}
 	
 	public boolean interact(Player player, Direction dir){
+		if(!super.interact(player, dir)){
+			System.out.println("Super interact faileds");
+			return false;
+		}
 		if(portal != null){
 			System.out.println("Interacting with portal");
-			player.moveTo(portal.getWhereYouComeOut(player), portal.getPortsTo().getDirection());
+			Cell target = portal.getWhereYouComeOut(player);
+			if(target != null){
+				System.out.println("Player should get out at "+target.getX()+","+target.getY()+" facing "+portal.getPortsTo().getDirection());
+				player.moveTo(target, portal.getPortsTo().getDirection());
+				return true;
+			}
 		}
-		
-		return true;
+		super.moveBackPlayer(player, dir);
+		return false;
 	}
 }

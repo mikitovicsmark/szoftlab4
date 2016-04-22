@@ -22,19 +22,19 @@ public class Portal {
 		portsTo = p;
 	}
 	
-	public Portal(Direction dir, Color col, SpecialWall wall, Portal otherPortal) {
+	public Portal(Direction dir, Color col, SpecialWall wall) {
 		direction = dir;
 		color = col;
 		location = wall;
-		portsTo = otherPortal;
+		System.out.println("Portal created at "+wall.getX()+","+wall.getY()+" facing "+dir);
 	}
 
 	public Cell getWhereYouComeOut(Player player) {
 		int x = 0;
 		int y = 0;
-		switch(direction){
+		switch(portsTo.getDirection()){
 		case DOWN:
-			y = 0;
+			y = 1;
 			break;
 		case LEFT:
 			x = -1;
@@ -46,9 +46,15 @@ public class Portal {
 			y = -1;
 			break;
 		}
-		x += portsTo.getLocation().getX();
-		y += portsTo.getLocation().getY();
-		
-		return player.getField().getCell(x, y);
+		if(portsTo != null){
+			x += portsTo.getLocation().getX();
+			y += portsTo.getLocation().getY();
+
+			System.out.println("Should go to "+x+","+y);
+			System.out.println("Becouse direction is "+portsTo.getDirection());
+			return player.getField().getCell(x, y);
+		}
+		System.out.println("No target found");
+		return null;
 	}
 }

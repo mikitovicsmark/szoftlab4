@@ -19,32 +19,40 @@ public class Wall extends Cell implements Interactable {
 
 	@Override
 	public boolean interact(Player player, Direction dir) {
-		int playerX = player.getPosition().getX();
-		int playerY = player.getPosition().getY();
-		Cell previous;
 		if(!isPassable){
-			switch (dir) {
-			case UP:
-				previous = player.getField().getCell(playerX, playerY + 1);
-				player.setPosition(previous);
-				break;
-			case DOWN:
-				previous = player.getField().getCell(playerX, playerY - 1);
-				player.setPosition(previous);
-				break;
-			case LEFT:
-				previous = player.getField().getCell(playerX - 1, playerY);
-				player.setPosition(previous);
-				break;
-			case RIGHT:
-				previous = player.getField().getCell(playerX + 1, playerY);
-				player.setPosition(previous);
-				break;
-
-			}
-			System.out.println("Player bumped into a wall");
+			moveBackPlayer(player, dir);
+			System.out.println("Player bumped into a wall. Direction: "+dir);
 			return false;
 		}
 		return true;
+	}
+
+	public void moveBackPlayer(Player player, Direction dir) {
+		int playerX = player.getPosition().getX();
+		int playerY = player.getPosition().getY();
+		Cell previous;
+		
+		//Sets the player back to its previous place
+		//Coordinates may seem to be changed, but if you
+		//think about it, they should move the player up (Y-1)
+		//if he tryed to move Down. This appies to all directions
+		switch (dir) {
+		case UP:
+			previous = player.getField().getCell(playerX, playerY + 1);
+			player.setPosition(previous);
+			break;
+		case DOWN:
+			previous = player.getField().getCell(playerX, playerY - 1);
+			player.setPosition(previous);
+			break;
+		case LEFT:
+			previous = player.getField().getCell(playerX + 1, playerY);
+			player.setPosition(previous);
+			break;
+		case RIGHT:
+			previous = player.getField().getCell(playerX - 1, playerY);
+			player.setPosition(previous);
+			break;
+		}
 	}
 }

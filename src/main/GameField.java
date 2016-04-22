@@ -21,6 +21,8 @@ public class GameField {
 	}
 
 	public void Initialize(int startLevel) {
+		//reset map
+		cells = new ArrayList<List<Cell>>();
 		level = startLevel;
 		List<String> stringLines = new Serializer().loadMap(level);
 		width = stringLines.get(0).length();

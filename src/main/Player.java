@@ -50,38 +50,40 @@ public class Player implements Moving {
 	}
 	
 	public void shootFirstPortal(Color col){
-		Portal tmpPortal = shootPortal(dir, col, firstPortal);
+		Portal tmpPortal = shootPortal(dir, col);
 		if (tmpPortal != null) {
-			if(firstPortal!=null){
+			if(firstPortal!= null){
 				firstPortal.getLocation().setPortal(null);
 			}
 			firstPortal = tmpPortal;
 			if(secondPortal != null){
+				firstPortal.setPortsTo(secondPortal);
 				secondPortal.setPortsTo(firstPortal);
 			}
 		}
 	}
 
 	public void shootSecondPortal(Color col){
-		Portal tmpPortal = shootPortal(dir, col, firstPortal);
+		Portal tmpPortal = shootPortal(dir, col);
 		if (tmpPortal != null) {
-			if(secondPortal!=null){
+			if(secondPortal != null){
 				secondPortal.getLocation().setPortal(null);
 			}
 			secondPortal = tmpPortal;
 			if(firstPortal != null){
 				firstPortal.setPortsTo(secondPortal);
+				secondPortal.setPortsTo(firstPortal);
 			}
 		}
 	}
 	
-	private Portal shootPortal(Direction dir, Color col, Portal otherPortal){
+	private Portal shootPortal(Direction dir, Color col){
 		Cell cell = position;
 		boolean canGoFurther = true;
 		while(canGoFurther){
 			switch (dir) {
 				case DOWN:
-					if(cell.getY() + 1 > field.getHeight()){
+					if(cell.getY() + 1 >= field.getHeight()){
 						return null;
 					}
 					cell = field.getCell(cell.getX(), cell.getY() + 1);
@@ -127,7 +129,7 @@ public class Player implements Moving {
 				portalDir = Direction.DOWN;
 				break;
 			}
-			Portal newPortal = new Portal(portalDir, col, (SpecialWall)cell, otherPortal);
+			Portal newPortal = new Portal(portalDir, col, (SpecialWall)cell);
 			((SpecialWall) cell).setPortal(newPortal);
 			return newPortal;
 		}
