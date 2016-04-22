@@ -4,7 +4,7 @@ public class Exit extends Wall {
 
 	public Exit(int x, int y) {
 		super(x, y);
-		this.setImage('E');
+		this.setImage('e');
 	}
 	
 	public boolean interact(Player player, Direction dir){
@@ -16,6 +16,7 @@ public class Exit extends Wall {
 	}
 	
 	public void openExit(){
+		this.setImage('E');
 		this.setPassable(true);
 	}
 

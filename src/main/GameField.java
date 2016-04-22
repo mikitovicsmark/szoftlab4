@@ -100,6 +100,10 @@ public class GameField {
 	public int getLevel() {
 		return level;
 	}
+	
+	public void addZpm(int n){
+		zpmCount += n;
+	}
 
 	public void zpmPickedUp() {
 		zpmCount--;

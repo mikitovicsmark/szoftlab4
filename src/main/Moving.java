@@ -1,5 +1,5 @@
 package main;
 
 public interface Moving {
-	public void moveTo(Cell cell, Direction dir);
+	public abstract void moveTo(Cell cell, Direction dir);
 }
