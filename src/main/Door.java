@@ -2,6 +2,7 @@ package main;
 
 public class Door extends Wall {
 	Color color;
+
 	public Door(int x, int y, Color col) {
 		super(x, y);
 		this.setImage('d');

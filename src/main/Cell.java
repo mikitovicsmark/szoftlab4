@@ -5,11 +5,6 @@ public class Cell implements Interactable {
 	private int y;
 	private char image;
 
-	public Cell(int x, int y) {
-		this.x = x;
-		this.y = y;
-	}
-
 	public char getImage() {
 		return image;
 	}
@@ -29,6 +24,11 @@ public class Cell implements Interactable {
 
 	public int getY() {
 		return y;
+	}
+	
+	public Cell(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
 	@Override

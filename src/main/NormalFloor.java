@@ -1,7 +1,9 @@
 package main;
 
 public class NormalFloor extends Cell implements Interactable {
-
+	private Box box;
+	private Zpm zpm;
+	
 	public NormalFloor(int x, int y, Cell item) {
 		super(x, y);
 		this.setImage('.');
@@ -15,9 +17,6 @@ public class NormalFloor extends Cell implements Interactable {
 			}
 		}
 	}
-	
-	private Box box;
-	private Zpm zpm;
 	
 	public boolean interact(Player player, Direction dir){
 		if(box != null){

@@ -1,13 +1,13 @@
 package main;
 
 public class Player implements Moving {
-
-	public Player(Cell position) {
-		this.position = position;
-		this.image = 'O';
-	}
-
+	private Cell position;
+	private char image;
+	private Box box;
 	private GameField field;
+	private int zpmCount;
+	private Portal firstPortal;
+	private Portal secondPortal;
 
 	public GameField getField() {
 		return field;
@@ -16,10 +16,6 @@ public class Player implements Moving {
 	public void setField(GameField field) {
 		this.field = field;
 	}
-
-	private Cell position;
-	private char image;
-	private Box box;
 
 	public Box getBox() {
 		return box;
@@ -45,6 +41,87 @@ public class Player implements Moving {
 		this.position = cell;
 	}
 	
+	public Player(Cell position) {
+		this.position = position;
+		this.image = 'O';
+		zpmCount = 0;
+	}
+	
+	public void shootFirstPortal(Direction dir, Color col){
+		Portal tmpPortal = shootPortal(dir, col, firstPortal);
+		if (tmpPortal != null) {
+			firstPortal = tmpPortal;
+			secondPortal.setPortsTo(firstPortal);
+		}
+	}
+
+	public void shootSecondPortal(Direction dir, Color col){
+		Portal tmpPortal = shootPortal(dir, col, firstPortal);
+		if (tmpPortal != null) {
+			secondPortal = tmpPortal;
+			firstPortal.setPortsTo(secondPortal);
+		}
+	}
+	
+	private Portal shootPortal(Direction dir, Color col, Portal otherPortal){
+		Cell cell = position;
+		boolean canGoFurther = true;
+		while(canGoFurther){
+			switch (dir) {
+				case DOWN:
+					if(cell.getY() + 1 > field.getHeight()){
+						return null;
+					}
+					cell = field.getCell(cell.getX(), cell.getY() + 1);
+					break;
+				case LEFT:
+					if(cell.getX() - 1 < 0){
+						return null;
+					}
+					cell = field.getCell(cell.getX() - 1, cell.getY());
+					break;
+				case RIGHT:
+					if(cell.getX() + 1 > field.getWidth()){
+						return null;
+					}
+					cell = field.getCell(cell.getX() + 1, cell.getY());
+					break;
+				case UP:
+					if(cell.getY() - 1 < 0) {
+						return null;
+					}
+					cell = field.getCell(cell.getX(), cell.getY() - 1);
+					break;
+				}
+			if(cell instanceof Wall){
+				canGoFurther = false;
+			}
+		}
+
+		Direction portalDir = null;
+		if(cell instanceof SpecialWall){
+			cell = (SpecialWall) cell;
+			switch(dir){
+			case DOWN:
+				portalDir = Direction.UP;
+				break;
+			case LEFT:
+				portalDir = Direction.RIGHT;
+				break;
+			case RIGHT:
+				portalDir = Direction.LEFT;
+				break;
+			case UP:
+				portalDir = Direction.DOWN;
+				break;
+			}
+			Portal newPortal = new Portal(portalDir, col, cell, otherPortal);
+			((SpecialWall) cell).setPortal(newPortal);
+			return newPortal;
+		}
+		return null;
+	}
+	
 	public void kill(){
 		field.Initialize(field.getLevel());
 	}
@@ -56,7 +133,7 @@ public class Player implements Moving {
 	}
 
 	public void pickUpZpm() {
+		zpmCount++;
 		field.zpmPickedUp();
-		
 	}
 }

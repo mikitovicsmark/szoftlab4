@@ -3,7 +3,6 @@ package main;
 import java.util.ArrayList;
 
 public class Switch extends NormalFloor {
-
 	Door door;
 	ArrayList<Box> boxList;
 	int openWeight;
@@ -46,5 +45,4 @@ public class Switch extends NormalFloor {
 		door.open();
 		return true;
 	}
-
 }
