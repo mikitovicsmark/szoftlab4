@@ -22,25 +22,27 @@ public class Wall extends Cell {
 		int playerX = player.getPosition().getX();
 		int playerY = player.getPosition().getY();
 		Cell previous;
-		switch (dir) {
-		case UP:
-			previous = player.getField().getCell(playerX, playerY - 1);
-			player.setPosition(previous);
-			break;
-		case DOWN:
-			previous = player.getField().getCell(playerX, playerY + 1);
-			player.setPosition(previous);
-			break;
-		case LEFT:
-			previous = player.getField().getCell(playerX - 1, playerY);
-			player.setPosition(previous);
-			break;
-		case RIGHT:
-			previous = player.getField().getCell(playerX + 1, playerY);
-			player.setPosition(previous);
-			break;
+		if(!isPassable){
+			switch (dir) {
+			case UP:
+				previous = player.getField().getCell(playerX, playerY - 1);
+				player.setPosition(previous);
+				break;
+			case DOWN:
+				previous = player.getField().getCell(playerX, playerY + 1);
+				player.setPosition(previous);
+				break;
+			case LEFT:
+				previous = player.getField().getCell(playerX - 1, playerY);
+				player.setPosition(previous);
+				break;
+			case RIGHT:
+				previous = player.getField().getCell(playerX + 1, playerY);
+				player.setPosition(previous);
+				break;
 
+			}
+			System.out.println("Player bumped into a wall");
 		}
-		System.out.println("Player bumped into a wall");
 	}
 }
