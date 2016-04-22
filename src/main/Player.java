@@ -35,6 +35,10 @@ public class Player implements Moving {
 	public void setPosition(Cell cell) {
 		this.position = cell;
 	}
+	
+	public void kill(){
+		field.Initialize(new Serializer().loadMap(0));
+	}
 
 	@Override
 	public void moveTo(Cell cell, Direction dir) {

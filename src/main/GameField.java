@@ -29,6 +29,9 @@ public class GameField {
 			for (int j = 0; j < width; j++) {
 				char nextCell = stringLines.get(i).charAt(j);
 				switch (nextCell) {
+				case 'P':
+					line.add(new Pit(j, i));
+					break;
 				case '.':
 					line.add(new NormalFloor(j, i));
 					break;
