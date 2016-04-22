@@ -8,23 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Serializer {
-	
-	public List<String> loadMap(int level){
-		
+
+	public List<String> loadMap(int level) {
+
 		String levelPath = "";
-		
-		switch(level){
-			case 0:
-				levelPath = "/testmap";
-				break;
+
+		switch (level) {
+		case 0:
+			levelPath = "/testmap";
+			break;
 		}
-		
+
 		InputStream is = this.getClass().getResourceAsStream(levelPath);
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-		
+
 		List<String> lines = new ArrayList<String>();
 		String line;
-		
+
 		try {
 			while ((line = reader.readLine()) != null) {
 				lines.add(line);

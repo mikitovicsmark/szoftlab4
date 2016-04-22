@@ -1,14 +1,14 @@
 package main;
 
-public class Player implements Moving{
-	
-	public Player(Cell position){
-		this.position=position;
-		this.image='O';
+public class Player implements Moving {
+
+	public Player(Cell position) {
+		this.position = position;
+		this.image = 'O';
 	}
-	
+
 	private GameField field;
-	
+
 	public GameField getField() {
 		return field;
 	}
@@ -19,7 +19,7 @@ public class Player implements Moving{
 
 	private Cell position;
 	private char image;
-	
+
 	public char getImage() {
 		return image;
 	}
@@ -32,10 +32,10 @@ public class Player implements Moving{
 		return position;
 	}
 
-	public void setPosition(Cell cell){
-		this.position=cell;
+	public void setPosition(Cell cell) {
+		this.position = cell;
 	}
-	
+
 	@Override
 	public void moveTo(Cell cell, Direction dir) {
 		this.setPosition(cell);
