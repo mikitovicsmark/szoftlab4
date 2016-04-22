@@ -33,6 +33,11 @@ public class SpecialWall extends Wall {
 		}
 		if(portal != null){
 			System.out.println("Interacting with portal");
+			if(!directionMatchesWithPortalDirection(dir)){
+				System.out.println("You no enter da portal from wring direction !!");
+				super.moveBackPlayer(player, dir);
+				return false;
+			}
 			Cell target = portal.getWhereYouComeOut(player);
 			if(target != null){
 				System.out.println("Player should get out at "+target.getX()+","+target.getY()+" facing "+portal.getPortsTo().getDirection());
@@ -42,5 +47,12 @@ public class SpecialWall extends Wall {
 		}
 		super.moveBackPlayer(player, dir);
 		return false;
+	}
+
+	private boolean directionMatchesWithPortalDirection(Direction dir) {
+		return dir == Direction.DOWN && portal.getDirection() == Direction.UP ||
+			   dir == Direction.LEFT && portal.getDirection() == Direction.RIGHT ||
+			   dir == Direction.RIGHT && portal.getDirection() == Direction.LEFT ||
+			   dir == Direction.UP && portal.getDirection() == Direction.DOWN;
 	}
 }
