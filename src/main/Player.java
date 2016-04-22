@@ -8,6 +8,7 @@ public class Player implements Moving {
 	private int zpmCount;
 	private Portal firstPortal;
 	private Portal secondPortal;
+	private Direction dir;
 
 	public GameField getField() {
 		return field;
@@ -45,9 +46,10 @@ public class Player implements Moving {
 		this.position = position;
 		this.image = 'O';
 		zpmCount = 0;
+		dir = Direction.RIGHT;
 	}
 	
-	public void shootFirstPortal(Direction dir, Color col){
+	public void shootFirstPortal(Color col){
 		Portal tmpPortal = shootPortal(dir, col, firstPortal);
 		if (tmpPortal != null) {
 			firstPortal = tmpPortal;
@@ -55,7 +57,7 @@ public class Player implements Moving {
 		}
 	}
 
-	public void shootSecondPortal(Direction dir, Color col){
+	public void shootSecondPortal(Color col){
 		Portal tmpPortal = shootPortal(dir, col, firstPortal);
 		if (tmpPortal != null) {
 			secondPortal = tmpPortal;
@@ -128,6 +130,7 @@ public class Player implements Moving {
 
 	@Override
 	public void moveTo(Cell cell, Direction dir) {
+		this.dir = dir;
 		this.setPosition(cell);
 		cell.interact(this, dir);
 	}
