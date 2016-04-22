@@ -26,6 +26,7 @@ public class GameField {
 		List<String> stringLines = new Serializer().loadMap(level);
 		width = stringLines.get(0).length();
 		height = stringLines.size();
+		zpmCount = 0;
 
 		for (int i = 0; i < height; i++) {
 			List<Cell> line = new ArrayList<Cell>();
@@ -33,6 +34,7 @@ public class GameField {
 				char nextCell = stringLines.get(i).charAt(j);
 				switch (nextCell) {
 				case 'Z':
+					zpmCount++;
 					line.add(new NormalFloor(j, i, new Zpm(j, i)));
 					break;
 				case 'B':
@@ -103,8 +105,6 @@ public class GameField {
 		zpmCount--;
 		if(zpmCount <= 0){
 			exit.openExit();
-		}
-		
+		}	
 	}
-
 }
