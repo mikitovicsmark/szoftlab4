@@ -32,9 +32,9 @@ public class Cell implements Interactable {
 	}
 
 	@Override
-	public void interact(Player player, Direction dir) {
+	public boolean interact(Player player, Direction dir) {
 		System.out.println("Player stepped on " + x + " " + y);
-
+		return true;
 	}
 
 }

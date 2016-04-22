@@ -9,7 +9,7 @@ public class Switch extends NormalFloor {
 	int openWeight;
 	
 	public Switch(int x, int y, Door d) {
-		super(x, y);
+		super(x, y, null);
 		this.setImage('S');
 		door = d;
 	}
@@ -42,8 +42,9 @@ public class Switch extends NormalFloor {
 		return weightSum;
 	}
 	
-	public void interact(Player player, Direction dir){
+	public boolean interact(Player player, Direction dir){
 		door.open();
+		return true;
 	}
 
 }

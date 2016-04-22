@@ -19,7 +19,16 @@ public class Player implements Moving {
 
 	private Cell position;
 	private char image;
+	private Box box;
 
+	public Box getBox() {
+		return box;
+	}
+	
+	public void setBox(Box b) {
+		box = b;
+	}
+	
 	public char getImage() {
 		return image;
 	}
@@ -37,12 +46,17 @@ public class Player implements Moving {
 	}
 	
 	public void kill(){
-		field.Initialize(new Serializer().loadMap(0));
+		field.Initialize(field.getLevel());
 	}
 
 	@Override
 	public void moveTo(Cell cell, Direction dir) {
 		this.setPosition(cell);
 		cell.interact(this, dir);
+	}
+
+	public void pickUpZpm() {
+		field.zpmPickedUp();
+		
 	}
 }

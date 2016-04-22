@@ -6,7 +6,7 @@ public class Game {
 	public static void main(String[] args) {
 
 		GameField gameField = new GameField();
-		gameField.Initialize(new Serializer().loadMap(0));
+		gameField.Initialize(0);
 		boolean exit = false;
 		Scanner scanner = new Scanner(System.in);
 

@@ -1,6 +1,6 @@
 package main;
 
-public class Wall extends Cell {
+public class Wall extends Cell implements Interactable {
 
 	public Wall(int x, int y) {
 		super(x, y);
@@ -18,7 +18,7 @@ public class Wall extends Cell {
 	}
 
 	@Override
-	public void interact(Player player, Direction dir) {
+	public boolean interact(Player player, Direction dir) {
 		int playerX = player.getPosition().getX();
 		int playerY = player.getPosition().getY();
 		Cell previous;
@@ -43,6 +43,8 @@ public class Wall extends Cell {
 
 			}
 			System.out.println("Player bumped into a wall");
+			return false;
 		}
+		return true;
 	}
 }
