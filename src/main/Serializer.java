@@ -4,31 +4,35 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
-public class MapReader {
-	
-	public void loadMap(int level){
-		
+public class Serializer {
+
+	public List<String> loadMap(int level) {
+
 		String levelPath = "";
-		
-		switch(level){
-			case 0:
-				levelPath = "/testmap";
-				break;
+
+		switch (level) {
+		case 0:
+			levelPath = "/testmap";
+			break;
 		}
-		
+
 		InputStream is = this.getClass().getResourceAsStream(levelPath);
-		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+
+		List<String> lines = new ArrayList<String>();
 		String line;
+
 		try {
 			while ((line = reader.readLine()) != null) {
-				System.out.println(line);
-
+				lines.add(line);
 			}
+			return lines;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 	}
 }
