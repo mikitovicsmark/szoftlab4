@@ -18,6 +18,12 @@ public class Game {
 			int playerY = gameField.getPlayer().getPosition().getY();
 			// System.out.println("playerX :"+playerX+" playerY :"+playerY);
 			switch (scanner.next()) {
+			case "q":
+				gameField.getPlayer().shootFirstPortal(Color.BLUE);
+				break;
+			case "e":
+				gameField.getPlayer().shootSecondPortal(Color.YELLOW);
+				break;
 			case "s":
 				if (playerY < gameField.getHeight() - 1) {
 					gameField.getPlayer().moveTo(gameField.getCell(playerX, playerY + 1), Direction.DOWN);

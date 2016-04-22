@@ -52,16 +52,26 @@ public class Player implements Moving {
 	public void shootFirstPortal(Color col){
 		Portal tmpPortal = shootPortal(dir, col, firstPortal);
 		if (tmpPortal != null) {
+			if(firstPortal!=null){
+				firstPortal.getLocation().setPortal(null);
+			}
 			firstPortal = tmpPortal;
-			secondPortal.setPortsTo(firstPortal);
+			if(secondPortal != null){
+				secondPortal.setPortsTo(firstPortal);
+			}
 		}
 	}
 
 	public void shootSecondPortal(Color col){
 		Portal tmpPortal = shootPortal(dir, col, firstPortal);
 		if (tmpPortal != null) {
+			if(secondPortal!=null){
+				secondPortal.getLocation().setPortal(null);
+			}
 			secondPortal = tmpPortal;
-			firstPortal.setPortsTo(secondPortal);
+			if(firstPortal != null){
+				firstPortal.setPortsTo(secondPortal);
+			}
 		}
 	}
 	
@@ -117,7 +127,7 @@ public class Player implements Moving {
 				portalDir = Direction.DOWN;
 				break;
 			}
-			Portal newPortal = new Portal(portalDir, col, cell, otherPortal);
+			Portal newPortal = new Portal(portalDir, col, (SpecialWall)cell, otherPortal);
 			((SpecialWall) cell).setPortal(newPortal);
 			return newPortal;
 		}
@@ -130,6 +140,7 @@ public class Player implements Moving {
 
 	@Override
 	public void moveTo(Cell cell, Direction dir) {
+		System.out.println("X: " + cell.getX() + " Y: " + cell.getY());
 		this.dir = dir;
 		this.setPosition(cell);
 		cell.interact(this, dir);

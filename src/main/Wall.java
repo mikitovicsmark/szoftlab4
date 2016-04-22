@@ -25,11 +25,11 @@ public class Wall extends Cell implements Interactable {
 		if(!isPassable){
 			switch (dir) {
 			case UP:
-				previous = player.getField().getCell(playerX, playerY - 1);
+				previous = player.getField().getCell(playerX, playerY + 1);
 				player.setPosition(previous);
 				break;
 			case DOWN:
-				previous = player.getField().getCell(playerX, playerY + 1);
+				previous = player.getField().getCell(playerX, playerY - 1);
 				player.setPosition(previous);
 				break;
 			case LEFT:

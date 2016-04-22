@@ -53,6 +53,9 @@ public class GameField {
 				case '|':
 					line.add(new Wall(j, i));
 					break;
+				case 'L':
+					line.add(new SpecialWall(j, i));
+					break;
 				case 'O':
 					Cell floor = new NormalFloor(j, i, null);
 					this.player = new Player(floor);

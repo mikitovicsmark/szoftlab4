@@ -3,10 +3,14 @@ package main;
 public class Portal {
 	private Direction direction;
 	private Color color;
-	private Cell location;
+	private SpecialWall location;
 	private Portal portsTo;
+
+	public Direction getDirection() {
+		return direction;
+	}
 	
-	public Cell getLocation(){
+	public SpecialWall getLocation(){
 		return location;
 	}
 	
@@ -18,11 +22,33 @@ public class Portal {
 		portsTo = p;
 	}
 	
-	public Portal(Direction dir, Color col, Cell cell, Portal otherPortal) {
+	public Portal(Direction dir, Color col, SpecialWall wall, Portal otherPortal) {
 		direction = dir;
 		color = col;
-		location = cell;
+		location = wall;
 		portsTo = otherPortal;
 	}
 
+	public Cell getWhereYouComeOut(Player player) {
+		int x = 0;
+		int y = 0;
+		switch(direction){
+		case DOWN:
+			y = 0;
+			break;
+		case LEFT:
+			x = -1;
+			break;
+		case RIGHT:
+			x = 1;
+			break;
+		case UP:
+			y = -1;
+			break;
+		}
+		x += portsTo.getLocation().getX();
+		y += portsTo.getLocation().getY();
+		
+		return player.getField().getCell(x, y);
+	}
 }

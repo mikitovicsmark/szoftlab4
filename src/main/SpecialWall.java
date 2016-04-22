@@ -11,8 +11,10 @@ public class SpecialWall extends Wall {
 	public void setPortal(Portal p){
 		portal = p;
 		if(p != null) {
+			this.setPassable(true);
 			this.setImage('T');
 		}else{
+			this.setPassable(false);
 			this.setImage('L');
 		}
 	}
@@ -21,5 +23,14 @@ public class SpecialWall extends Wall {
 		super(x, y);
 		this.setImage('L');
 		portal = null;
+	}
+	
+	public boolean interact(Player player, Direction dir){
+		if(portal != null){
+			System.out.println("Interacting with portal");
+			player.moveTo(portal.getWhereYouComeOut(player), portal.getPortsTo().getDirection());
+		}
+		
+		return true;
 	}
 }
