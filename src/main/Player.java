@@ -14,6 +14,14 @@ public class Player implements Moving {
 		return field;
 	}
 
+	public int getZpmCount(){
+		return zpmCount;
+	}
+	
+	public void setZpmCount(){
+		zpmCount++;
+	}
+	
 	public void setField(GameField field) {
 		this.field = field;
 	}

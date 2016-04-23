@@ -60,7 +60,7 @@ public class Game {
 						else{
 							//If the NormalFloor has no box on it, the current box is placed then removed from the player's inventory 
 							if(!((NormalFloor) gameField.getCell(playerX, playerY)).hasBox() && gameField.getPlayer().getBox()!=null){
-								((NormalFloor) gameField.getCell(playerX, playerX)).putBox(gameField.getPlayer().getBox());
+								((NormalFloor) gameField.getCell(playerX, playerY)).putBox(gameField.getPlayer().getBox());
 								gameField.getCell(playerX, playerY).setImage('B');
 								gameField.getPlayer().setBox(null);
 							}
