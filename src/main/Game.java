@@ -52,17 +52,18 @@ public class Game {
 						if (gameField.getPlayer().getBox()==null){
 							if (((NormalFloor) gameField.getCell(playerX, playerY)).hasBox()){
 								//Setting the current box in the players inventory to be the one that was on the floor
-								gameField.getPlayer().setBox(((NormalFloor) gameField.getCell(playerX, playerY)).getBox());
+								gameField.getPlayer().setBox(((NormalFloor) gameField.getCell(playerX, playerY)).pickUpBox());
 								gameField.getCell(playerX, playerY).setImage('.');
 							}
 						}
 						//Scenario of putting down an already equipped box
 						else{
 							//If the NormalFloor has no box on it, the current box is placed then removed from the player's inventory 
-							if(!((NormalFloor) gameField.getCell(playerX, playerY)).hasBox())
-							((NormalFloor) gameField.getCell(playerX, playerX)).putBox(gameField.getPlayer().getBox());
-							gameField.getCell(playerX, playerY).setImage('B');
-							gameField.getPlayer().setBox(null);
+							if(!((NormalFloor) gameField.getCell(playerX, playerY)).hasBox() && gameField.getPlayer().getBox()!=null){
+								((NormalFloor) gameField.getCell(playerX, playerX)).putBox(gameField.getPlayer().getBox());
+								gameField.getCell(playerX, playerY).setImage('B');
+								gameField.getPlayer().setBox(null);
+							}
 						}
 					}
 					break;

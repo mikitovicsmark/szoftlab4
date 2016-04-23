@@ -27,7 +27,7 @@ public class NormalFloor extends Cell implements Interactable {
 		return true;
 	}
 	
-	public Box getBox(){
+	public Box pickUpBox(){
 		Box temp = box;
 		box = null;
 		return temp;
@@ -38,10 +38,7 @@ public class NormalFloor extends Cell implements Interactable {
 	}
 
 	public boolean hasBox(){
-		if (box!=null)
-			return true;
-		else 
-			return false;
+		return box!=null;
 	}
 
 }
