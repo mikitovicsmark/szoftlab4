@@ -30,11 +30,13 @@ public class NormalFloor extends Cell implements Interactable {
 	public Box pickUpBox(){
 		Box temp = box;
 		box = null;
+		this.setImage('.');
 		return temp;
 	}
 	
-	public void putBox(Box b){
+	public void putDownBox(Box b){
 		box = b;
+		this.setImage('B');
 	}
 
 	public boolean hasBox(){
