@@ -19,18 +19,26 @@ public class NormalFloor extends Cell implements Interactable {
 	}
 	
 	public boolean interact(Player player, Direction dir){
-		if(box != null){
-			player.setBox(box);
-			box = null;
-			this.setImage('.');
-			return true;
-		}
 		if(zpm != null){
 			player.pickUpZpm();
 			zpm = null;
 			this.setImage('.');
 		}
 		return true;
+	}
+	
+	public Box pickUpBox(){
+		Box temp = box;
+		box = null;
+		return temp;
+	}
+	
+	public void putBox(Box b){
+		box = b;
+	}
+
+	public boolean hasBox(){
+		return box!=null;
 	}
 
 }
