@@ -49,6 +49,7 @@ public class Switch extends NormalFloor {
 		return weightSum;
 	}
 	
+	@Override
 	public boolean interact(Player player, Direction dir){
 		door.open();
 		return true;
