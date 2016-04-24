@@ -17,9 +17,13 @@ public class Player implements Moving {
 	public void setField(GameField field) {
 		this.field = field;
 	}
-
+	
 	public void setFirstPortal(Portal firstp){//for testing purposes
 		firstPortal = firstp;
+	}
+
+	public int getZpmCount()  {
+		return zpmCount;
 	}
 	
 	public void setSecondPortal(Portal secp){//for testing purposes
