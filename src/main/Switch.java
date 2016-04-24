@@ -45,4 +45,9 @@ public class Switch extends NormalFloor {
 		door.open();
 		return true;
 	}
+
+	public boolean interact(Replicator player, Direction dir){
+		door.open();
+		return true;
+	}
 }

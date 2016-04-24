@@ -93,13 +93,17 @@ public class GameField {
 		return cells.get(y).get(x);
 	}
 
+	public void setCell(int x, int y, Cell cell){
+		this.cells.get(y).set(x, cell);
+	}
+
 	public void print() {
 		for (List<Cell> row : cells) {
 			for (Cell cell : row) {
 				if (cell == this.player.getPosition()) {
 					System.out.print(this.player.getImage());
 				}
-				else if (cell == this.replicator.getPosition()){
+				else if (this.replicator != null && cell == this.replicator.getPosition()){
 					System.out.print(this.replicator.getImage());
 				}
 				else {

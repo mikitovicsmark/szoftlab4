@@ -113,6 +113,13 @@ public class Player implements Moving {
 		}
 
 		Direction portalDir = null;
+
+		//kill the replicator with portal bullet
+		if (cell.getX() == field.getReplicator().getPosition().getX() &&
+				cell.getY() == field.getReplicator().getPosition().getY()){
+			field.setReplicator(null);
+		}
+
 		if(cell instanceof SpecialWall){
 			cell = (SpecialWall) cell;
 			switch(dir){
