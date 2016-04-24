@@ -13,6 +13,7 @@ public class Switch extends NormalFloor {
 		this.setImage('S');
 		door = d;
 		ID=nwid;
+		boxList = new ArrayList<Box>();
 	}
 	public int getID(){
 		return ID;

@@ -165,6 +165,10 @@ public class GameField {
     public int getLevel() {
         return level;
     }
+	public void setCell(int x, int y, Cell cell){
+		this.cells.get(y).set(x, cell);
+	}
+
    
     public void addZpm(int n){
         zpmCount += n;
