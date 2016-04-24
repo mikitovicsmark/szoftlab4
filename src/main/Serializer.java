@@ -17,6 +17,12 @@ public class Serializer {
 		case 0:
 			levelPath = "/testmap";
 			break;
+		case 10:
+			levelPath = "/Test10";
+			break;
+		case 11:
+			levelPath = "/Test11";
+			break;
 		}
 
 		InputStream is = this.getClass().getResourceAsStream(levelPath);
