@@ -34,7 +34,7 @@ public class SpecialWall extends Wall {
 		if(portal != null){
 			System.out.println("Interacting with portal");
 			if(!directionMatchesWithPortalDirection(dir)){
-				System.out.println("You no enter da portal from wring direction !!");
+				System.out.println("You no enter da portal from wrong direction !!");
 				super.moveBackPlayer(player, dir);
 				return false;
 			}

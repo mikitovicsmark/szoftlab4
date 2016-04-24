@@ -60,9 +60,23 @@ public class GameField {
 					break;
 				case 'O':
 					Cell floor = new NormalFloor(j, i, null);
-					this.player = new Player(floor);
+					this.player.setPosition(floor);//PREVIOUSLY: this.player = new Player(floor); // no need for a new player to create.
 					this.player.setField(this);
 					line.add(floor);
+					break;
+				case 'K': //BLUE Portal
+					SpecialWall sp1 = new SpecialWall(j,i);
+					Portal kportal = new Portal(Direction.LEFT,Color.BLUE,sp1);//NOTE: default direction is LEFT, you need to change in the tests
+					sp1.setPortal(kportal);
+					player.setFirstPortal(kportal);
+					line.add(sp1);
+					break;
+				case 'S': //YELLOW Portal
+					SpecialWall sp2 = new SpecialWall(j,i);
+					Portal sportal = new Portal(Direction.LEFT,Color.YELLOW,sp2);//NOTE: default direction is LEFT, you need to change in the tests
+					sp2.setPortal(sportal);
+					player.setSecondPortal(sportal);
+					line.add(sp2);
 					break;
 				}
 			}

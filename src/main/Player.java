@@ -18,6 +18,14 @@ public class Player implements Moving {
 		this.field = field;
 	}
 
+	public void setFirstPortal(Portal firstp){//for testing purposes
+		firstPortal = firstp;
+	}
+	
+	public void setSecondPortal(Portal secp){//for testing purposes
+		secondPortal = secp;
+	}
+	
 	public Box getBox() {
 		return box;
 	}
@@ -151,5 +159,12 @@ public class Player implements Moving {
 	public void pickUpZpm() {
 		zpmCount++;
 		field.zpmPickedUp();
+	}
+	
+	public void bindPortals(Portal p1, Portal p2){
+		if ((p1!=null) && (p2!=null) ){
+			p1.setPortsTo(p2);
+			p2.setPortsTo(p1);
+		}
 	}
 }
