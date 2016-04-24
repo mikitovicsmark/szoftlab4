@@ -7,10 +7,12 @@ public class Switch extends NormalFloor {
 	ArrayList<Box> boxList;
 	int openWeight;
 	
-	public Switch(int x, int y, Door d) {
+	public Switch(int x, int y, int ow, Door d) {
 		super(x, y, null);
 		this.setImage('S');
 		door = d;
+		openWeight=ow;
+		boxList = new ArrayList<Box>();
 	}
 	
 	public void putDownBox(Box box){

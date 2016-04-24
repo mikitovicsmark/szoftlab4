@@ -81,6 +81,11 @@ public class GameField {
 	public Cell getCell(int x, int y) {
 		return cells.get(y).get(x);
 	}
+	
+	public void setCell(int x, int y, Cell cell){
+		this.cells.get(y).set(x, cell);
+	}
+
 
 	public void print() {
 		for (List<Cell> row : cells) {
