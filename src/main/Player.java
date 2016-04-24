@@ -17,21 +17,25 @@ public class Player implements Moving {
 	public void setField(GameField field) {
 		this.field = field;
 	}
-
+	
 	public void setFirstPortal(Portal firstp){//for testing purposes
 		firstPortal = firstp;
 	}
 
-	public Portal getFirstPortal(){
-		return firstPortal;
-	}
-	
-	public Portal getSecondPortal(){
-		return secondPortal;
+	public int getZpmCount()  {
+		return zpmCount;
 	}
 	
 	public void setSecondPortal(Portal secp){//for testing purposes
 		secondPortal = secp;
+	}
+	
+	public Portal getFirstPortal(){
+		return this.firstPortal;
+	}
+	
+	public Portal getSecondPortal(){
+		return this.secondPortal;
 	}
 	
 	public Box getBox() {
@@ -168,6 +172,7 @@ public class Player implements Moving {
 		this.dir = dir;
 		this.setPosition(cell);
 		cell.interact(this, dir);
+		System.out.println("PX "+this.getPosition().getX()+" PY "+this.getPosition().getY());
 	}
 
 	public void pickUpZpm() {

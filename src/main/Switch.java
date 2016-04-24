@@ -6,10 +6,19 @@ public class Switch extends NormalFloor {
 	Door door;
 	ArrayList<Box> boxList;
 	int openWeight;
+	int ID;
 	
-	public Switch(int x, int y, Door d) {
+	public Switch(int x, int y, Door d, int openWeight, int nwid) {
 		super(x, y, null);
+		boxList = new ArrayList<Box>();
 		this.setImage('S');
+		door = d;
+		ID=nwid;
+	}
+	public int getID(){
+		return ID;
+	}
+	public void setDoor(Door d){
 		door = d;
 	}
 	
@@ -41,8 +50,10 @@ public class Switch extends NormalFloor {
 		return weightSum;
 	}
 	
+	@Override
 	public boolean interact(Player player, Direction dir){
 		door.open();
 		return true;
 	}
+	
 }
