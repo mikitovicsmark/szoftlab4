@@ -10,6 +10,10 @@ public class Portal {
 		return direction;
 	}
 	
+	public void setDirection(Direction dir){//for testing purposes
+		this.direction = dir;
+	}
+	
 	public SpecialWall getLocation(){
 		return location;
 	}
@@ -55,7 +59,7 @@ public class Portal {
 			y += portsTo.getLocation().getY();
 
 			System.out.println("Should go to "+x+","+y);
-			System.out.println("Becouse direction is "+portsTo.getDirection());
+			System.out.println("Because direction is "+portsTo.getDirection());
 			return player.getField().getCell(x, y);
 		}
 		System.out.println("No target found");

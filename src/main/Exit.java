@@ -9,7 +9,8 @@ public class Exit extends Wall {
 	
 	public boolean interact(Player player, Direction dir){
 		if(super.interact(player, dir)){
-			player.getField().loadNextLevel();
+			System.out.println("Player exited from map");
+			player.kill();
 			return true;
 		}
 		return false;

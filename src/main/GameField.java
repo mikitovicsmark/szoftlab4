@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GameField {
 	private int level;	
-	private Player player;
+	private Player player = new Player();
 	private List<List<Cell>> cells = new ArrayList<List<Cell>>();
 	private int height;
 	private int width;
