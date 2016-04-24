@@ -14,6 +14,10 @@ public class Portal {
 		return location;
 	}
 	
+	public Color getColor(){
+		return color;
+	}
+	
 	public Portal getPortsTo(){
 		return portsTo;
 	}
