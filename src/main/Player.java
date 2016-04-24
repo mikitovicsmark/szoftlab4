@@ -158,6 +158,7 @@ public class Player implements Moving {
 		this.dir = dir;
 		this.setPosition(cell);
 		cell.interact(this, dir);
+		System.out.println("PX "+this.getPosition().getX()+" PY "+this.getPosition().getY());
 	}
 
 	public void pickUpZpm() {
