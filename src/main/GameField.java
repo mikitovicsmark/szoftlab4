@@ -86,25 +86,25 @@ public class GameField {
                     this.player.setField(this);
                     line.add(floor);
                     realX++;
-					break;
-				case 'K': //BLUE Portal
-					SpecialWall sp1 = new SpecialWall(realX, realY);
-					Portal kportal = new Portal(Direction.LEFT,Color.BLUE,sp1);//NOTE: default direction is LEFT, you need to change in the tests
-					sp1.setPortal(kportal);
-					player.setFirstPortal(kportal);
-					line.add(sp1);
-					realX++;
-					break;
-				case 'S': //YELLOW Portal
-					SpecialWall sp2 = new SpecialWall(realX, realY);
-					Portal sportal = new Portal(Direction.LEFT,Color.YELLOW,sp2);//NOTE: default direction is LEFT, you need to change in the tests
-					sp2.setPortal(sportal);
-					player.setSecondPortal(sportal);
-					line.add(sp2);
-					realX++;
+		    break;
+		case 'K': //BLUE Portal
+		    SpecialWall sp1 = new SpecialWall(realX, realY);
+		    Portal kportal = new Portal(Direction.LEFT,Color.BLUE,sp1);//NOTE: default direction is LEFT, you need to change in the tests
+		    sp1.setPortal(kportal);
+		    player.setFirstPortal(kportal);
+		    line.add(sp1);
+		    realX++;
+		    break;
+		case 'S': //YELLOW Portal
+		    SpecialWall sp2 = new SpecialWall(realX, realY);
+		    Portal sportal = new Portal(Direction.LEFT,Color.YELLOW,sp2);//NOTE: default direction is LEFT, you need to change in the tests
+		    sp2.setPortal(sportal);
+		    player.setSecondPortal(sportal);
+		    line.add(sp2);
+		    realX++;
                     break;
                 default :
-                	break;
+                    break;
                 }
             }
             cells.add(line);
