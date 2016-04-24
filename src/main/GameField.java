@@ -6,6 +6,7 @@ import java.util.List;
 public class GameField {
 	private int level;	
 	private Player player;
+	private Replicator replicator;
 	private List<List<Cell>> cells = new ArrayList<List<Cell>>();
 	private int height;
 	private int width;
@@ -16,9 +17,13 @@ public class GameField {
 		return player;
 	}
 
+	public Replicator getReplicator() { return replicator; }
+
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
+
+	public void setReplicator(Replicator replicator) { this.replicator = replicator; }
 
 	public void Initialize(int startLevel) {
 		//reset map
@@ -64,6 +69,12 @@ public class GameField {
 					this.player.setField(this);
 					line.add(floor);
 					break;
+				case 'R':
+					Cell floor2 = new NormalFloor(j,i, null);
+					this.replicator = new Replicator(floor2);
+					this.replicator.setField(this);
+					line.add(floor2);
+					break;
 				}
 			}
 			cells.add(line);
@@ -87,7 +98,11 @@ public class GameField {
 			for (Cell cell : row) {
 				if (cell == this.player.getPosition()) {
 					System.out.print(this.player.getImage());
-				} else {
+				}
+				else if (cell == this.replicator.getPosition()){
+					System.out.print(this.replicator.getImage());
+				}
+				else {
 					System.out.print(cell.getImage());
 				}
 

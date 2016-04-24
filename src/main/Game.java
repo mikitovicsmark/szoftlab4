@@ -1,6 +1,10 @@
 package main;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Random;
 
 public class Game {
 	public static void main(String[] args) {
@@ -11,6 +15,9 @@ public class Game {
 		Scanner scanner = new Scanner(System.in);
 
 		gameField.print();
+
+		//random move of Replicator
+		gameField.getReplicator().randomMove();
 
 		while (scanner.hasNext() && !exit) {
 

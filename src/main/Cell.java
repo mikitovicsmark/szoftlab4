@@ -37,4 +37,10 @@ public class Cell implements Interactable {
 		return true;
 	}
 
+	@Override
+	public boolean interact(Replicator replicator, Direction dir) {
+		System.out.println("Replicator stepped on " + x + " " + y);
+		return true;
+	}
+
 }
