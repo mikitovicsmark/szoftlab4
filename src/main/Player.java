@@ -30,6 +30,14 @@ public class Player implements Moving {
 		secondPortal = secp;
 	}
 	
+	public Portal getFirstPortal(){
+		return this.firstPortal;
+	}
+	
+	public Portal getSecondPortal(){
+		return this.secondPortal;
+	}
+	
 	public Box getBox() {
 		return box;
 	}
@@ -59,6 +67,12 @@ public class Player implements Moving {
 		this.image = 'O';
 		zpmCount = 0;
 		dir = Direction.RIGHT;
+	}
+	
+	public Player(){
+		this.image = 'O';
+		this.zpmCount = 0;
+		this.dir = Direction.RIGHT;
 	}
 	
 	public void shootFirstPortal(Color col){
@@ -166,10 +180,10 @@ public class Player implements Moving {
 		field.zpmPickedUp();
 	}
 	
-	public void bindPortals(Portal p1, Portal p2){
-		if ((p1!=null) && (p2!=null) ){
-			p1.setPortsTo(p2);
-			p2.setPortsTo(p1);
+	public void bindPortals(){
+		if ((firstPortal!=null) && (secondPortal!=null) ){
+			firstPortal.setPortsTo(secondPortal);
+			secondPortal.setPortsTo(firstPortal);
 		}
 	}
 }

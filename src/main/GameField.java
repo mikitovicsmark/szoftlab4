@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
  
 public class GameField {
+
     private int level; 
     private Player player;
     private List<List<Cell>> cells = new ArrayList<List<Cell>>();
