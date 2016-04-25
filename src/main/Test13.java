@@ -20,7 +20,7 @@ public class Test13 {
     @Test
     public void replicatorThroughWall(){
         GameField gameField = new GameField();
-        gameField.Initialize(0);
+        gameField.Initialize(13);
 
         Cell wall = gameField.getCell(4,0);
         gameField.getReplicator().moveTo(gameField.getCell(5,0),Direction.RIGHT);

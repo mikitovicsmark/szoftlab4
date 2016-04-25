@@ -17,7 +17,19 @@ public class Player implements Moving {
 	public void setField(GameField field) {
 		this.field = field;
 	}
+	
+	public void setFirstPortal(Portal firstp){//for testing purposes
+		firstPortal = firstp;
+	}
 
+	public int getZpmCount()  {
+		return zpmCount;
+	}
+	
+	public void setSecondPortal(Portal secp){//for testing purposes
+		secondPortal = secp;
+	}
+	
 	public Box getBox() {
 		return box;
 	}
@@ -80,6 +92,7 @@ public class Player implements Moving {
 	private Portal shootPortal(Direction dir, Color col){
 		Cell cell = position;
 		boolean canGoFurther = true;
+		boolean hitReplicator = false;
 		while(canGoFurther){
 			switch (dir) {
 				case DOWN:
@@ -107,6 +120,13 @@ public class Player implements Moving {
 					cell = field.getCell(cell.getX(), cell.getY() - 1);
 					break;
 				}
+			if(field.getReplicator() != null){
+				if (cell.getX() == field.getReplicator().getPosition().getX() &&
+						cell.getY() == field.getReplicator().getPosition().getY()){
+					hitReplicator = true;
+					canGoFurther = false;
+				}
+			}
 			if(cell instanceof Wall){
 				canGoFurther = false;
 			}
@@ -114,10 +134,9 @@ public class Player implements Moving {
 
 		Direction portalDir = null;
 
-		//kill the replicator with portal bullet
-		if (cell.getX() == field.getReplicator().getPosition().getX() &&
-				cell.getY() == field.getReplicator().getPosition().getY()){
+		if(hitReplicator){
 			field.setReplicator(null);
+			return null;
 		}
 
 		if(cell instanceof SpecialWall){
@@ -153,10 +172,18 @@ public class Player implements Moving {
 		this.dir = dir;
 		this.setPosition(cell);
 		cell.interact(this, dir);
+		System.out.println("PX "+this.getPosition().getX()+" PY "+this.getPosition().getY());
 	}
 
 	public void pickUpZpm() {
 		zpmCount++;
 		field.zpmPickedUp();
+	}
+	
+	public void bindPortals(Portal p1, Portal p2){
+		if ((p1!=null) && (p2!=null) ){
+			p1.setPortsTo(p2);
+			p2.setPortsTo(p1);
+		}
 	}
 }
