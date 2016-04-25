@@ -5,16 +5,16 @@ import java.util.List;
  
 public class GameField {
 	private Replicator replicator;
-	private int level;
-	private Player player;
-	private List<List<Cell>> cells = new ArrayList<List<Cell>>();
-	private int height;
-	private int width;
-	private Exit exit;
-	private int zpmCount;
+    private int level;
+    private Player player;
+    private List<List<Cell>> cells = new ArrayList<List<Cell>>();
+    private int height;
+    private int width;
+    private Exit exit;
+    private int zpmCount;
 
-	private int realX = 0;
-	private int realY = 0;
+    private int realX = 0;
+    private int realY = 0;
 
 	public Replicator getReplicator() { return replicator; }
 
@@ -53,7 +53,7 @@ public class GameField {
 			System.out.println("");
 		}
 	}
- 
+
     public Player getPlayer() {
         return player;
     }
