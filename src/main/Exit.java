@@ -15,6 +15,11 @@ public class Exit extends Wall {
 		}
 		return false;
 	}
+
+	//interact with Replicator
+	public boolean interact(Replicator player, Direction dir){
+		return false;
+	}
 	
 	public void openExit(){
 		this.setImage('E');

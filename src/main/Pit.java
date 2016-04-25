@@ -12,4 +12,9 @@ public class Pit extends NormalFloor {
 		return true;
 	}
 
+	public boolean interact(Replicator replicator, Direction dir){
+		replicator.die();
+		return true;
+	}
+
 }

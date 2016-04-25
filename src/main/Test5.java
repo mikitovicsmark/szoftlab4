@@ -99,7 +99,8 @@ public class Test5 {
 		if(gameField.getCell(x,y).getImage()== 'Z')
 			gameField.getPlayer().pickUpZpm();
 		gameField.print();
-			
+
+		System.out.println(gameField.getCell(2,2).getImage());
 		assertEquals('.', gameField.getCell(2,2).getImage());
 	}
 }

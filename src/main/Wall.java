@@ -27,6 +27,17 @@ public class Wall extends Cell implements Interactable {
 		return true;
 	}
 
+	//interact with Replicator
+	@Override
+	public boolean interact(Replicator player, Direction dir) {
+		if(!isPassable){
+			moveBackPlayer(player, dir);
+			System.out.println("Replicator bumped into a wall. Direction: "+dir);
+			return false;
+		}
+		return true;
+	}
+
 	public void moveBackPlayer(Player player, Direction dir) {
 		int playerX = player.getPosition().getX();
 		int playerY = player.getPosition().getY();

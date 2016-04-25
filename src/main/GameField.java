@@ -4,18 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
  
 public class GameField {
-
-    private int level; 
+	private Replicator replicator;
+    private int level;
     private Player player;
     private List<List<Cell>> cells = new ArrayList<List<Cell>>();
     private int height;
     private int width;
     private Exit exit;
     private int zpmCount;
-    
+
     private int realX = 0;
     private int realY = 0;
- 
+
+	public Replicator getReplicator() { return replicator; }
+
+	public void setReplicator(Replicator replicator) { this.replicator = replicator; }
+
+	public int getHeight() {
+		return height;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public Cell getCell(int x, int y) {
+		return cells.get(y).get(x);
+	}
+
+	public void setCell(int x, int y, Cell cell){
+		this.cells.get(y).set(x, cell);
+	}
+
+	public void print() {
+		for (List<Cell> row : cells) {
+			for (Cell cell : row) {
+				if (cell == this.player.getPosition()) {
+					System.out.print(this.player.getImage());
+				}
+				else if (this.replicator != null && cell == this.replicator.getPosition()){
+					System.out.print(this.replicator.getImage());
+				}
+				else {
+					System.out.print(cell.getImage());
+				}
+
+			}
+			System.out.println("");
+		}
+	}
+
     public Player getPlayer() {
         return player;
     }
@@ -80,6 +118,14 @@ public class GameField {
                     line.add(new SpecialWall(realX, realY));
                     realX++;
                     break;
+				case 'R':
+					Cell floor2 = new NormalFloor(realX, realY, null);
+					this.replicator = new Replicator(floor2);
+					this.replicator.setPosition(floor2);//PREVIOUSLY: this.player = new Player(floor); // no need for a new player to create.
+					this.replicator.setField(this);
+					line.add(floor2);
+					realX++;
+					break;
                 case 'O':
                     Cell floor = new NormalFloor(realX, realY, null);
                     this.player = new Player(floor);
@@ -131,32 +177,7 @@ public class GameField {
 			}
         }
     }
- 
-    public int getHeight() {
-        return height;
-    }
- 
-    public int getWidth() {
-        return width;
-    }
- 
-    public Cell getCell(int x, int y) {
-        return cells.get(y).get(x);
-    }
- 
-    public void print() {
-        for (List<Cell> row : cells) {
-            for (Cell cell : row) {
-                if (cell == this.player.getPosition()) {
-                    System.out.print(this.player.getImage());
-                } else {
-                    System.out.print(cell.getImage());
-                }
- 
-            }
-            System.out.println("");
-        }
-    }
+
  
     public void loadNextLevel() {
         level++;
@@ -166,11 +187,6 @@ public class GameField {
     public int getLevel() {
         return level;
     }
-    
-    public void setCell(int x, int y, Cell cell){
-	this.cells.get(y).set(x, cell);
-    }
-
    
     public void addZpm(int n){
         zpmCount += n;

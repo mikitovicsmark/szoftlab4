@@ -106,6 +106,7 @@ public class Player implements Moving {
 	private Portal shootPortal(Direction dir, Color col){
 		Cell cell = position;
 		boolean canGoFurther = true;
+		boolean hitReplicator = false;
 		while(canGoFurther){
 			switch (dir) {
 				case DOWN:
@@ -133,12 +134,25 @@ public class Player implements Moving {
 					cell = field.getCell(cell.getX(), cell.getY() - 1);
 					break;
 				}
+			if(field.getReplicator() != null){
+				if (cell.getX() == field.getReplicator().getPosition().getX() &&
+						cell.getY() == field.getReplicator().getPosition().getY()){
+					hitReplicator = true;
+					canGoFurther = false;
+				}
+			}
 			if(cell instanceof Wall){
 				canGoFurther = false;
 			}
 		}
 
 		Direction portalDir = null;
+
+		if(hitReplicator){
+			field.setReplicator(null);
+			return null;
+		}
+
 		if(cell instanceof SpecialWall){
 			cell = (SpecialWall) cell;
 			switch(dir){

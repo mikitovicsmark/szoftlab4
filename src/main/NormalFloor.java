@@ -43,4 +43,9 @@ public class NormalFloor extends Cell implements Interactable {
 		return box!=null;
 	}
 
+	//interact with Replicator
+	public boolean interact(Replicator replicator, Direction dir){
+		return false;
+	}
+
 }
