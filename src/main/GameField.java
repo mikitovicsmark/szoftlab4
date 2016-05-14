@@ -2,11 +2,27 @@ package main;
  
 import java.util.ArrayList;
 import java.util.List;
+
+import enums.Color;
+import enums.Direction;
+import gameElements.Box;
+import gameElements.Cell;
+import gameElements.Door;
+import gameElements.Exit;
+import gameElements.NormalFloor;
+import gameElements.Pit;
+import gameElements.Player;
+import gameElements.Portal;
+import gameElements.Replicator;
+import gameElements.SpecialWall;
+import gameElements.Switch;
+import gameElements.Wall;
+import gameElements.Zpm;
  
 public class GameField {
-	private Replicator replicator;
+	Replicator replicator;
     private int level;
-    private Player player;
+    Player player;
     private List<List<Cell>> cells = new ArrayList<List<Cell>>();
     private int height;
     private int width;
