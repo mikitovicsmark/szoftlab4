@@ -189,7 +189,7 @@ public class Player implements Moving {
 
 	@Override
 	public void moveTo(Cell cell, Direction dir) {
-		//If we were standing on a switch then we need to call the stepedoff method on it before moving elsewhere
+		//If we were standing on a switch then we need to call the steppedoff method on it before moving elsewhere
 		if(wasOnSwitch){
 			((Switch) this.position).steppedOff();
 		}
