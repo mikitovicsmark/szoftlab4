@@ -75,10 +75,18 @@ public class GamePanel extends JPanel implements KeyListener {
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
 					}
+					 else if (gameField.replicator != null
+								&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+							g.drawImage(replicator, j * 40, i * 40, null);
+					 }
 					break;
 				case 'd': // closed door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(closedDoor, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'Z': // zpm
 					g.drawImage(normalFloor, j * 40, i * 40, null);
@@ -100,10 +108,18 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'E': // exit
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(exitOpen, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
-				case 'e': // exit
+				case 'e': // exit close
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(exitClosed, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'P': // pit
 					g.drawImage(pit, j * 40, i * 40, null);
