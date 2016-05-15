@@ -74,11 +74,10 @@ public class GamePanel extends JPanel implements KeyListener {
 					g.drawImage(openDoor, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
+					} else if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
 					}
-					 else if (gameField.replicator != null
-								&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
-							g.drawImage(replicator, j * 40, i * 40, null);
-					 }
 					break;
 				case 'd': // closed door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
