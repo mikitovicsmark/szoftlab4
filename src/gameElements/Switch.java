@@ -42,7 +42,6 @@ public class Switch extends NormalFloor {
 			door.close();
 			System.out.println("yolo");
 		}
-
 		return topBox;
 	}
 
@@ -75,5 +74,9 @@ public class Switch extends NormalFloor {
 		if (getBoxListWeight() < openWeight) {
 			door.close();
 		}
+	}
+
+	public boolean isEmpty() {
+		return getBoxListWeight() == 0;
 	}
 }
