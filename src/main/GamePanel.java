@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import enums.Color;
 import enums.Direction;
 import gameElements.NormalFloor;
+import gameElements.SpecialWall;
+import gameElements.Portal;
 
 public class GamePanel extends JPanel implements KeyListener {
 
@@ -114,8 +116,15 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'O': // Oneill
 					g.drawImage(oneill, j * 40, i * 40, null);
 					break;
-				case 'K': // BLUE Portal
-					g.drawImage(bluePortal, j * 40, i * 40, null);
+				case 'T': // Portal
+					g.drawImage(specialWall, j * 40, i * 40, null);
+					Portal tempPortal = ((SpecialWall) this.gameField.getCell(j, i)).getPortal();
+					if (tempPortal.getColor() == Color.BLUE) {
+						g.drawImage(bluePortal, j * 40, i * 40, null);
+					}
+					if (tempPortal.getColor() == Color.YELLOW) {
+						g.drawImage(yellowPortal, j * 40, i * 40, null);
+					}
 					break;
 				case 'S': // SWITCH
 					g.drawImage(weight, j * 40, i * 40, null);
