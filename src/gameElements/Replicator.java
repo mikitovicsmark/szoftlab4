@@ -16,12 +16,14 @@ public class Replicator extends Player implements Moving{
     private char image;
     private GameField field;
     private Direction dir;
+    private boolean wasOnSwitch;
 
     public Replicator(Cell position) {
         super(position);
         this.position = position;
         this.image = 'R';
         dir = Direction.RIGHT;
+        wasOnSwitch=false;
     }
 
     public GameField getField() {
@@ -56,9 +58,18 @@ public class Replicator extends Player implements Moving{
 
     @Override
     public void moveTo(Cell cell, Direction dir) {
-        this.dir = dir;
-        this.setPosition(cell);
-        cell.interact(this, dir);
+		if(wasOnSwitch){
+			((Switch) this.position).steppedOff();
+		}
+		this.dir = dir;
+		this.setPosition(cell);
+		cell.interact(this, dir);
+		if(cell instanceof Switch){
+			wasOnSwitch=true;
+		}
+		else{
+			wasOnSwitch=false;
+		}
     }
 
     public void randomMove(){
