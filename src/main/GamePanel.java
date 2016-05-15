@@ -13,6 +13,9 @@ import javax.swing.JPanel;
 import enums.Color;
 import enums.Direction;
 import gameElements.NormalFloor;
+import gameElements.SpecialWall;
+import gameElements.Portal;
+import gameElements.Switch;
 
 public class GamePanel extends JPanel implements KeyListener {
 
@@ -21,8 +24,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	 */
 	private static final long serialVersionUID = 6644375181764124582L;
 
-	private Image weight, openDoor, zpm, box, exit, pit, normalFloor, wall, specialWall, replicator, oneill, bluePortal,
-			yellowPortal, closedDoor;
+	private Image weight, openDoor, zpm, box, exitOpen, exitClosed, pit, normalFloor, wall, specialWall, replicator,
+			oneill, bluePortalUP, bluePortalDOWN, bluePortalLEFT, bluePortalRIGHT, yellowPortal, yellowPortalUP,
+			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox;
 
 	private GameField gameField;
 
@@ -34,15 +38,23 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.closedDoor = ImageIO.read(new File("src/images/doorclosed.png"));
 			this.zpm = ImageIO.read(new File("src/images/zpm.png"));
 			this.box = ImageIO.read(new File("src/images/box.png"));
-			this.exit = ImageIO.read(new File("src/images/exit_closed.png"));
+			this.exitClosed = ImageIO.read(new File("src/images/exit_closed.png"));
+			this.exitOpen = ImageIO.read(new File("src/images/exit_closed.png"));
 			this.pit = ImageIO.read(new File("src/images/pit.png"));
 			this.normalFloor = ImageIO.read(new File("src/images/floor.png"));
 			this.wall = ImageIO.read(new File("src/images/wall.png"));
 			this.specialWall = ImageIO.read(new File("src/images/specialwall.png"));
 			this.replicator = ImageIO.read(new File("src/images/replicator.png"));
 			this.oneill = ImageIO.read(new File("src/images/character.png"));
-			this.bluePortal = ImageIO.read(new File("src/images/blueportal.png"));
-			this.yellowPortal = ImageIO.read(new File("src/images/orangeportal.png"));
+			this.bluePortalUP = ImageIO.read(new File("src/images/specialwallBluePortalTop.png"));
+			this.bluePortalDOWN = ImageIO.read(new File("src/images/specialwallBluePortalDown.png"));
+			this.bluePortalLEFT = ImageIO.read(new File("src/images/specialwallBluePortalLeft.png"));
+			this.bluePortalRIGHT = ImageIO.read(new File("src/images/specialwallBluePortalRight.png"));
+			this.yellowPortalLEFT = ImageIO.read(new File("src/images/specialwallOrangePortalLeft.png"));
+			this.yellowPortalRIGHT = ImageIO.read(new File("src/images/specialwallOrangePortalRight.png"));
+			this.yellowPortalUP = ImageIO.read(new File("src/images/specialwallOrangePortalTop.png"));
+			this.yellowPortalDOWN = ImageIO.read(new File("src/images/specialwallOrangePortalDown.png"));
+			this.smallBox = ImageIO.read(new File("src/images/boxsmall.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -60,6 +72,9 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'D': // open door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(openDoor, j * 40, i * 40, null);
+					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
+						g.drawImage(oneill, j * 40, i * 40, null);
+					}
 					break;
 				case 'd': // closed door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
@@ -68,6 +83,10 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'Z': // zpm
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(zpm, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'B': // box
 					g.drawImage(box, j * 40, i * 40, null);
@@ -80,7 +99,11 @@ public class GamePanel extends JPanel implements KeyListener {
 					break;
 				case 'E': // exit
 					g.drawImage(normalFloor, j * 40, i * 40, null);
-					g.drawImage(exit, j * 40, i * 40, null);
+					g.drawImage(exitOpen, j * 40, i * 40, null);
+					break;
+				case 'e': // exit
+					g.drawImage(normalFloor, j * 40, i * 40, null);
+					g.drawImage(exitClosed, j * 40, i * 40, null);
 					break;
 				case 'P': // pit
 					g.drawImage(pit, j * 40, i * 40, null);
@@ -114,11 +137,46 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'O': // Oneill
 					g.drawImage(oneill, j * 40, i * 40, null);
 					break;
-				case 'K': // BLUE Portal
-					g.drawImage(bluePortal, j * 40, i * 40, null);
+				case 'T': // Portal
+					g.drawImage(specialWall, j * 40, i * 40, null);
+					Portal tempPortal = ((SpecialWall) this.gameField.getCell(j, i)).getPortal();
+					Image toPaint = null;
+					switch (tempPortal.getDirection()) {
+					case UP:
+						if (tempPortal.getColor() == Color.BLUE) {
+							toPaint = bluePortalUP;
+						} else if (tempPortal.getColor() == Color.YELLOW) {
+							toPaint = yellowPortalUP;
+						}
+						break;
+					case DOWN:
+						if (tempPortal.getColor() == Color.BLUE) {
+							toPaint = bluePortalDOWN;
+						} else if (tempPortal.getColor() == Color.YELLOW) {
+							toPaint = yellowPortalDOWN;
+						}
+						break;
+					case LEFT:
+						if (tempPortal.getColor() == Color.BLUE) {
+							toPaint = bluePortalLEFT;
+						} else if (tempPortal.getColor() == Color.YELLOW) {
+							toPaint = yellowPortalLEFT;
+						}
+						break;
+					case RIGHT:
+						if (tempPortal.getColor() == Color.BLUE) {
+							toPaint = bluePortalRIGHT;
+						} else if (tempPortal.getColor() == Color.YELLOW) {
+							toPaint = yellowPortalRIGHT;
+						}
+						break;
+					}
+					g.drawImage(toPaint, j * 40, i * 40, null);
 					break;
 				case 'S': // SWITCH
 					g.drawImage(weight, j * 40, i * 40, null);
+					if (!((Switch) this.gameField.getCell(j, i)).isEmpty())
+						g.drawImage(smallBox, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
 					} else if (gameField.replicator != null
@@ -176,7 +234,22 @@ public class GamePanel extends JPanel implements KeyListener {
 		case 'f':
 			// Checking if the current Cell is a NormalFloor, otherwise moving
 			// on to break
-			if (gameField.getCell(playerX, playerY) instanceof NormalFloor) {
+			if (gameField.getCell(playerX, playerY) instanceof Switch) {
+				if (gameField.getPlayer().getBox() == null) {
+					if (!((Switch) gameField.getCell(playerX, playerY)).isEmpty()) {
+						// Setting the current box in the players inventory to
+						// be the one that was on the floor
+						gameField.getPlayer().setBox(((Switch) gameField.getCell(playerX, playerY)).pickUpBox());
+					}
+				} else {
+					// If the NormalFloor has no box on it, the current box is
+					// placed then removed from the player's inventory
+					if (gameField.getPlayer().getBox() != null) {
+						((Switch) gameField.getCell(playerX, playerY)).putDownBox(gameField.getPlayer().getBox());
+						gameField.getPlayer().setBox(null);
+					}
+				}
+			} else if (gameField.getCell(playerX, playerY) instanceof NormalFloor) {
 				// The scenario of picking up a box from the floor
 				if (gameField.getPlayer().getBox() == null) {
 					if (((NormalFloor) gameField.getCell(playerX, playerY)).hasBox()) {
