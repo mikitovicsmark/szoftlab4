@@ -14,6 +14,7 @@ public class Player implements Moving {
 	private Portal firstPortal;
 	private Portal secondPortal;
 	private Direction dir;
+	private boolean wasOnSwitch;  //Needed to know if the player just stepped off a switch
 
 	public GameField getField() {
 		return field;
@@ -72,6 +73,7 @@ public class Player implements Moving {
 		this.image = 'O';
 		zpmCount = 0;
 		dir = Direction.RIGHT;
+		wasOnSwitch=false;
 	}
 	
 	public Player(){
@@ -187,9 +189,19 @@ public class Player implements Moving {
 
 	@Override
 	public void moveTo(Cell cell, Direction dir) {
+		//If we were standing on a switch then we need to call the stepedoff method on it before moving elsewhere
+		if(wasOnSwitch){
+			((Switch) this.position).steppedOff();
+		}
 		this.dir = dir;
 		this.setPosition(cell);
 		cell.interact(this, dir);
+		if(cell instanceof Switch){
+			wasOnSwitch=true;
+		}
+		else{
+			wasOnSwitch=false;
+		}
 		this.field.print();
 	}
 

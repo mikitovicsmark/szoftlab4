@@ -17,6 +17,7 @@ public class Switch extends NormalFloor {
 		door = d;
 		ID=nwid;
 		boxList = new ArrayList<Box>();
+		this.openWeight = openWeight;
 	}
 	public int getID(){
 		return ID;
@@ -35,9 +36,9 @@ public class Switch extends NormalFloor {
 	public Box pickUpBox(Player player){
 		Box topBox = boxList.get(boxList.size() - 1);
 		boxList.remove(boxList.size() - 1);
-		
 		if (getBoxListWeight() < openWeight){
 			door.close();
+			System.out.println("yolo");
 		}
 		
 		return topBox;	
@@ -55,12 +56,23 @@ public class Switch extends NormalFloor {
 	
 	@Override
 	public boolean interact(Player player, Direction dir){
-		door.open();
-		return true;
+		//The weight of the already placed boxes + 1 for the weight of the player (which is 1 unit)
+		if(getBoxListWeight() + 1 >= openWeight){	
+			door.open();
+		}
+			return true;
 	}
 
 	public boolean interact(Replicator player, Direction dir){
-		door.open();
+		//The weight of the already placed boxes + 1 for the weight of the replicator (which is 1 unit)
+		if(getBoxListWeight() + 1 >= openWeight){	
+			door.open();
+		}
 		return true;
+	}
+	public void steppedOff(){
+		if(getBoxListWeight() < openWeight){	
+			door.close();
+		}
 	}
 }
