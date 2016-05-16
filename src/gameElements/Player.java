@@ -217,7 +217,7 @@ public class Player implements Moving {
 		} else {
 			wasOnSwitch = false;
 		}
-		this.field.print();
+		//this.field.print();
 	}
 
 	public void pickUpZpm() {
