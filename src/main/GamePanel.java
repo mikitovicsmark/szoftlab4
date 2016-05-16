@@ -25,7 +25,7 @@ public class GamePanel extends JPanel implements KeyListener {
 	private static final long serialVersionUID = 6644375181764124582L;
 
 	private Image weight, openDoor, zpm, box, exitOpen, exitClosed, pit, normalFloor, wall, specialWall, replicator,
-			oneill, bluePortalUP, bluePortalDOWN, bluePortalLEFT, bluePortalRIGHT, yellowPortal, yellowPortalUP,
+			oneill, jaffa, bluePortalUP, bluePortalDOWN, bluePortalLEFT, bluePortalRIGHT, yellowPortal, yellowPortalUP,
 			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox;
 
 	private GameField gameField;
@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.wall = ImageIO.read(new File("src/images/wall.png"));
 			this.specialWall = ImageIO.read(new File("src/images/specialwall.png"));
 			this.replicator = ImageIO.read(new File("src/images/replicator.png"));
+			this.jaffa = ImageIO.read(new File("src/images/character2.png"));
 			this.oneill = ImageIO.read(new File("src/images/character.png"));
 			this.bluePortalUP = ImageIO.read(new File("src/images/specialwallBluePortalTop.png"));
 			this.bluePortalDOWN = ImageIO.read(new File("src/images/specialwallBluePortalDown.png"));
@@ -75,6 +76,9 @@ public class GamePanel extends JPanel implements KeyListener {
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
 					}
+					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
+						g.drawImage(jaffa, j*40, i*40, null);
+					}
 					break;
 				case 'd': // closed door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
@@ -92,7 +96,11 @@ public class GamePanel extends JPanel implements KeyListener {
 					g.drawImage(box, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
-					} else if (gameField.replicator != null
+					}
+					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
+							g.drawImage(jaffa, j*40, i*40, null);
+					}
+					else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
 						g.drawImage(replicator, j * 40, i * 40, null);
 					}
@@ -112,7 +120,11 @@ public class GamePanel extends JPanel implements KeyListener {
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
-					} else if (gameField.replicator != null
+					}
+					else if (gameField.getCell(j,i) == gameField.jaffa.getPosition()) {
+						g.drawImage(jaffa, j*40, i*40, null);
+					}
+					else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
 						g.drawImage(replicator, j * 40, i * 40, null);
 					}
@@ -133,6 +145,9 @@ public class GamePanel extends JPanel implements KeyListener {
 					break;
 				case 'R': // replicator
 					g.drawImage(replicator, j * 40, i * 40, null);
+					break;
+				case 'J': // Jaffa
+					g.drawImage(jaffa, j * 40, i * 40, null);
 					break;
 				case 'O': // Oneill
 					g.drawImage(oneill, j * 40, i * 40, null);
@@ -200,12 +215,20 @@ public class GamePanel extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		int playerX = gameField.getPlayer().getPosition().getX();
 		int playerY = gameField.getPlayer().getPosition().getY();
+		int jaffaX = gameField.getJaffa().getPosition().getX();
+		int jaffaY = gameField.getJaffa().getPosition().getY();
 		switch (e.getKeyChar()) {
 		case 'q':
 			gameField.getPlayer().shootFirstPortal(Color.BLUE);
 			break;
 		case 'e':
 			gameField.getPlayer().shootSecondPortal(Color.YELLOW);
+			break;
+		case '.':
+			gameField.getJaffa().shootFirstPortal(Color.RED);
+			break;
+		case '-':
+			gameField.getJaffa().shootSecondPortal(Color.GREEN);
 			break;
 		case 's':
 			if (playerY < gameField.getHeight() - 1) {
@@ -270,6 +293,28 @@ public class GamePanel extends JPanel implements KeyListener {
 				}
 			}
 			break;
+		}
+		switch(e.getKeyCode()){
+			case KeyEvent.VK_UP:
+				if (jaffaY > 0) {
+					gameField.getJaffa().moveTo(gameField.getCell(jaffaX, jaffaY - 1), Direction.UP);
+				}
+				break;
+			case KeyEvent.VK_DOWN:
+				if (jaffaY < gameField.getHeight() - 1) {
+					gameField.getJaffa().moveTo(gameField.getCell(jaffaX, jaffaY + 1), Direction.DOWN);
+				}
+				break;
+			case KeyEvent.VK_RIGHT:
+				if (jaffaX < gameField.getWidth() - 1) {
+					gameField.getJaffa().moveTo(gameField.getCell(jaffaX + 1, jaffaY), Direction.RIGHT);
+				}
+				break;
+			case KeyEvent.VK_LEFT:
+				if (jaffaX > 0) {
+					gameField.getJaffa().moveTo(gameField.getCell(jaffaX - 1, jaffaY), Direction.LEFT);
+				}
+				break;
 		}
 
 	}
