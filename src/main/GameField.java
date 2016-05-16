@@ -104,7 +104,7 @@ public class GameField {
                     realX++;
                     break;
                 case 'B':
-                    line.add(new NormalFloor(realX, realY, new Box(realX, realY, 1))); // TODO change from fix 5 weight for box
+                    line.add(new NormalFloor(realX, realY, new Box(realX, realY, 1))); 
                     realX++;
                     break;
                 case 'E':
