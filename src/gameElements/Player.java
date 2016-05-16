@@ -33,6 +33,10 @@ public class Player implements Moving {
 		return zpmCount;
 	}
 
+	public Direction getDirection(){
+		return dir;
+	}
+	
 	public void setSecondPortal(Portal secp) {// for testing purposes
 		secondPortal = secp;
 	}
