@@ -193,12 +193,12 @@ public class GamePanel extends JPanel implements KeyListener {
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
 					}
-					else if (gameField.getCell(j,i) == gameField.jaffa.getPosition()) {
-						g.drawImage(jaffa, j*40, i*40, null);
-					}
 					else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
 						g.drawImage(replicator, j * 40, i * 40, null);
+					}
+					else if (gameField.getCell(j,i) == gameField.jaffa.getPosition()) {
+						g.drawImage(jaffa, j*40, i*40, null);
 					}
 					break;
 				case '|': // wall
@@ -224,7 +224,7 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'O': // Oneill
 					g.drawImage(oneill, j * 40, i * 40, null);
 					break;
-				case 'T': // Oneills Portal
+				case 'T': // Portal
 					g.drawImage(specialWall, j * 40, i * 40, null);
 					Portal tempPortal = ((SpecialWall) this.gameField.getCell(j, i)).getPortal();
 					Image toPaint = null;
@@ -309,6 +309,9 @@ public class GamePanel extends JPanel implements KeyListener {
 					} else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
 						g.drawImage(replicator, j * 40, i * 40, null);
+					}
+					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
+						g.drawImage(jaffa, j*40, i*40, null);
 					}
 					break;
 				default:
@@ -401,6 +404,46 @@ public class GamePanel extends JPanel implements KeyListener {
 							&& gameField.getPlayer().getBox() != null) {
 						((NormalFloor) gameField.getCell(playerX, playerY)).putDownBox(gameField.getPlayer().getBox());
 						gameField.getPlayer().setBox(null);
+					}
+				}
+			}
+			break;
+		//Box interacts with Jaffa(player2), same as with Player
+		case ',':
+			// Checking if the current Cell is a NormalFloor, otherwise moving
+			// on to break
+			if (gameField.getCell(jaffaX, jaffaY) instanceof Switch) {
+				if (gameField.getJaffa().getBox() == null) {
+					if (!((Switch) gameField.getCell(jaffaX, jaffaY)).isEmpty()) {
+						// Setting the current box in the players inventory to
+						// be the one that was on the floor
+						gameField.getJaffa().setBox(((Switch) gameField.getCell(jaffaX, jaffaY)).pickUpBox());
+					}
+				} else {
+					// If the NormalFloor has no box on it, the current box is
+					// placed then removed from the player's inventory
+					if (gameField.getJaffa().getBox() != null) {
+						((Switch) gameField.getCell(jaffaX, jaffaY)).putDownBox(gameField.getJaffa().getBox());
+						gameField.getJaffa().setBox(null);
+					}
+				}
+			} else if (gameField.getCell(jaffaX, jaffaY) instanceof NormalFloor) {
+				// The scenario of picking up a box from the floor
+				if (gameField.getJaffa().getBox() == null) {
+					if (((NormalFloor) gameField.getCell(jaffaX, jaffaY)).hasBox()) {
+						// Setting the current box in the players inventory to
+						// be the one that was on the floor
+						gameField.getJaffa().setBox(((NormalFloor) gameField.getCell(jaffaX, jaffaY)).pickUpBox());
+					}
+				}
+				// Scenario of putting down an already equipped box
+				else {
+					// If the NormalFloor has no box on it, the current box is
+					// placed then removed from the player's inventory
+					if (!((NormalFloor) gameField.getCell(jaffaX, jaffaY)).hasBox()
+							&& gameField.getJaffa().getBox() != null) {
+						((NormalFloor) gameField.getCell(jaffaX, jaffaY)).putDownBox(gameField.getJaffa().getBox());
+						gameField.getJaffa().setBox(null);
 					}
 				}
 			}
