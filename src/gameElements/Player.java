@@ -163,7 +163,7 @@ public class Player implements Moving {
 		}
 
 		if (cell instanceof SpecialWall) {
-			if (!(((SpecialWall) cell).hasPortal())) {
+			if (!((SpecialWall) cell).hasPortal()) {
 				cell = (SpecialWall) cell;
 				switch (dir) {
 				case DOWN:
