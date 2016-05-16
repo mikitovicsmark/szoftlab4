@@ -15,13 +15,17 @@ import javax.swing.JPanel;
 public class Menu extends JPanel implements KeyListener {
 	private Image background,selectframe;
 	
-	//static paramters for drawing the menu
+	//static parameters for drawing the menu
 	private static final int xgap = 41; //distance between the map logos
 	private static final int ygap = 125; //distance between the map logos
 	private static final int xoffset = 242; // offset where to begin the frame
 	private static final int yoffset = 135; // offset where to begin the frame
 	
 	private int selectedmap = 1;//selected map's number
+	
+	private GameField gamefield; 
+	
+	public boolean needmenu = true;
 	
 	public Menu(){
 		try{
@@ -36,7 +40,9 @@ public class Menu extends JPanel implements KeyListener {
 		super.paintComponent(g);
 		g.drawImage(background, 0, 0, 800, 800,null);//drawing the background
 		g.setColor(Color.CYAN);
-		g.drawString("If you like our game please support us.", 75, 75);
+		g.setFont(new Font("Arial", Font.PLAIN, 24));
+		g.drawString("Gitegylet", 75, 75);
+		 
 			if (selectedmap < 6){//drawing image to the first row in the menu
 				g.drawImage(selectframe, (selectedmap * xgap) + xoffset, yoffset, null);
 			}
@@ -49,8 +55,10 @@ public class Menu extends JPanel implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		if (selectedmap < 6){ //valid for the first row of the menu
+		if (e.getKeyCode()==10){
+			this.needmenu = false;
+		}
+		else if (selectedmap < 6){ //valid for the first row of the menu
 			switch(e.getKeyChar()){
 			case 'w' ://jump to the second row
 				selectedmap += 5;
@@ -72,9 +80,8 @@ public class Menu extends JPanel implements KeyListener {
 				selectedmap +=1;
 				break;
 			}
-			return;
 		}
-		if (selectedmap > 5){ //valid for the second row of the menu
+		else if (selectedmap > 5){ //valid for the second row of the menu
 			switch(e.getKeyChar()){
 			case 'w' ://jump to the first row
 				selectedmap -= 5;
@@ -92,9 +99,8 @@ public class Menu extends JPanel implements KeyListener {
 				else{selectedmap += 1;}
 				break;
 			}
-			return;
 		}
-
+		
 	}
 
 	@Override
@@ -109,6 +115,14 @@ public class Menu extends JPanel implements KeyListener {
 
 	}
 	
-	public int getSelectedMap(){return selectedmap;}
+	public int getSelectedMap(){
+		return selectedmap;
+	}
+	
+	public void setGameField(GameField gf){
+		if(gf != null){
+			this.gamefield = gf;
+		}
+	}
 
 }
