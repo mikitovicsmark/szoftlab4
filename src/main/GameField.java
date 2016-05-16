@@ -229,7 +229,6 @@ public class GameField {
 					spawnedRandomZPM = true;
 					this.zpmCount++;
 					System.out.println(this.zpmCount);
-					System.out.print("ZPN SPAWNED AT:"+randomx+","+randomy);
 				}
 			}
 		}
