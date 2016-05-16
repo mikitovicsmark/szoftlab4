@@ -230,7 +230,7 @@ public class GameField {
 					((NormalFloor) tempCell).addZPM();
 					spawnedRandomZPM = true;
 					this.zpmCount++;
-					System.out.println(this.zpmCount);
+					//System.out.println(this.zpmCount);
 				}
 			}
 		}

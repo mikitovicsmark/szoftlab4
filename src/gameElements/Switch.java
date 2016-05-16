@@ -40,7 +40,6 @@ public class Switch extends NormalFloor {
 		boxList.remove(boxList.size() - 1);
 		if (getBoxListWeight() < openWeight) {
 			door.close();
-			System.out.println("yolo");
 		}
 		return topBox;
 	}
