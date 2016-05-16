@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	private Image weight, openDoor, zpm, box, exitOpen, exitClosed, pit, normalFloor, wall, specialWall, replicator,
 			oneill, bluePortalUP, bluePortalDOWN, bluePortalLEFT, bluePortalRIGHT, yellowPortal, yellowPortalUP,
-			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox, pinkSwitch, pinkDoorClosed, pinkDoorOpen,
-			blueSwitch, blueDoorClosed, blueDoorOpen, greenSwitch, greenDoorClosed, greenDoorOpen;
+			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox, pinkSwitch, pinkDoorClosed,
+			pinkDoorOpen, blueSwitch, blueDoorClosed, blueDoorOpen, greenSwitch, greenDoorClosed, greenDoorOpen;
 
 	private GameField gameField;
 
@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.zpm = ImageIO.read(new File("src/images/zpm.png"));
 			this.box = ImageIO.read(new File("src/images/box.png"));
 			this.exitClosed = ImageIO.read(new File("src/images/exit_closed.png"));
-			this.exitOpen = ImageIO.read(new File("src/images/exit_closed.png"));
+			this.exitOpen = ImageIO.read(new File("src/images/exit_open.png"));
 			this.pit = ImageIO.read(new File("src/images/pit.png"));
 			this.normalFloor = ImageIO.read(new File("src/images/floor.png"));
 			this.wall = ImageIO.read(new File("src/images/wall.png"));
@@ -66,7 +66,7 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.greenSwitch = ImageIO.read(new File("src/images/greenswitch.png"));
 			this.greenDoorClosed = ImageIO.read(new File("src/images/greendoorclosed.png"));
 			this.greenDoorOpen = ImageIO.read(new File("src/images/greendoorwithwallopen.png"));
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
