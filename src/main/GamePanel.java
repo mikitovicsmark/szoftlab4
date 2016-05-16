@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -371,6 +372,12 @@ public class GamePanel extends JPanel implements KeyListener {
 				}
 			}
 		}
+		g.setColor(java.awt.Color.CYAN);
+		g.setFont(new Font("Arial", Font.PLAIN, 18));
+		g.drawString("O'Neil zpm: " + gameField.getPlayer().getZpmCount(), 100, 25);
+		g.setColor(java.awt.Color.GREEN);
+		g.drawString("Jaffa zpm: " + gameField.getJaffa().getZpmCount(), 250, 25);
+		
 	}
 
 	public void setGameField(GameField gameField) {
