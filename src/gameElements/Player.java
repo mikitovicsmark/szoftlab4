@@ -153,6 +153,11 @@ public class Player implements Moving {
 			if (cell instanceof Wall && !(cell instanceof Door)) {
 				canGoFurther = false;
 			}
+			if (cell instanceof Door){
+				if (!((Door) cell).isPassable()){
+					canGoFurther=false;
+				}
+			}
 		}
 
 		Direction portalDir = null;
