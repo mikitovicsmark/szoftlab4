@@ -25,5 +25,7 @@ public class Door extends Wall {
 	public int getID(){
 		return ID;
 	}
-
+	public Color getColor(){
+		return color;
+	}
 }

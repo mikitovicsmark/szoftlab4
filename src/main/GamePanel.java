@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import enums.Color;
 import enums.Direction;
+import gameElements.Door;
 import gameElements.NormalFloor;
 import gameElements.SpecialWall;
 import gameElements.Portal;
@@ -26,7 +27,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
 	private Image weight, openDoor, zpm, box, exitOpen, exitClosed, pit, normalFloor, wall, specialWall, replicator,
 			oneill, jaffa, bluePortalUP, bluePortalDOWN, bluePortalLEFT, bluePortalRIGHT, yellowPortal, yellowPortalUP,
-			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox;
+			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox, pinkSwitch, pinkDoorClosed,
+			pinkDoorOpen, blueSwitch, blueDoorClosed, blueDoorOpen, greenSwitch, greenDoorClosed, greenDoorOpen;
 
 	private GameField gameField;
 
@@ -39,7 +41,7 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.zpm = ImageIO.read(new File("src/images/zpm.png"));
 			this.box = ImageIO.read(new File("src/images/box.png"));
 			this.exitClosed = ImageIO.read(new File("src/images/exit_closed.png"));
-			this.exitOpen = ImageIO.read(new File("src/images/exit_closed.png"));
+			this.exitOpen = ImageIO.read(new File("src/images/exit_open.png"));
 			this.pit = ImageIO.read(new File("src/images/pit.png"));
 			this.normalFloor = ImageIO.read(new File("src/images/floor.png"));
 			this.wall = ImageIO.read(new File("src/images/wall.png"));
@@ -56,6 +58,16 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.yellowPortalUP = ImageIO.read(new File("src/images/specialwallOrangePortalTop.png"));
 			this.yellowPortalDOWN = ImageIO.read(new File("src/images/specialwallOrangePortalDown.png"));
 			this.smallBox = ImageIO.read(new File("src/images/boxsmall.png"));
+			this.pinkSwitch = ImageIO.read(new File("src/images/pinkswitch.png"));
+			this.pinkDoorClosed = ImageIO.read(new File("src/images/pinkdoorclosedwithwall.png"));
+			this.pinkDoorOpen = ImageIO.read(new File("src/images/pinkdoorwithwallopen.png"));
+			this.blueSwitch = ImageIO.read(new File("src/images/blueswitch.png"));
+			this.blueDoorClosed = ImageIO.read(new File("src/images/bluedoorclosed.png"));
+			this.blueDoorOpen = ImageIO.read(new File("src/images/bluedoorwithwallopen.png"));
+			this.greenSwitch = ImageIO.read(new File("src/images/greenswitch.png"));
+			this.greenDoorClosed = ImageIO.read(new File("src/images/greendoorclosed.png"));
+			this.greenDoorOpen = ImageIO.read(new File("src/images/greendoorwithwallopen.png"));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -71,10 +83,27 @@ public class GamePanel extends JPanel implements KeyListener {
 					g.drawImage(weight, j * 40, i * 40, null);
 					break;
 				case 'D': // open door
-					g.drawImage(normalFloor, j * 40, i * 40, null);
-					g.drawImage(openDoor, j * 40, i * 40, null);
+					Image Paint = openDoor;
+					switch (((Door)this.gameField.getCell(j, i)).getID()) {
+						case 5:
+							Paint = pinkDoorOpen;
+							break;
+						case 4: 
+							Paint = greenDoorOpen;
+							break;
+						case 3:
+							Paint = blueDoorOpen;
+							break;
+						default: 
+							Paint = openDoor;
+							break;
+					}
+					g.drawImage(Paint, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
+					} else if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
 					}
 					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
 						g.drawImage(jaffa, j*40, i*40, null);
@@ -83,6 +112,30 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'd': // closed door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(closedDoor, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
+					Image Paint2 = closedDoor;
+					switch (((Door)this.gameField.getCell(j, i)).getID()) {
+						case 5:
+							Paint2 = pinkDoorClosed;
+							break;
+						case 4: 
+							Paint2 = greenDoorClosed;
+							break;
+						case 3:
+							Paint2 = blueDoorClosed;
+							break;
+						default: 
+							Paint2 = closedDoor;
+							break;
+					}
+					g.drawImage(Paint2, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'Z': // zpm
 					g.drawImage(normalFloor, j * 40, i * 40, null);
@@ -93,7 +146,8 @@ public class GamePanel extends JPanel implements KeyListener {
 					}
 					break;
 				case 'B': // box
-					g.drawImage(box, j * 40, i * 40, null);
+					g.drawImage(normalFloor, j * 40, i * 40, null);
+					g.drawImage(smallBox, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
 					}
@@ -108,10 +162,18 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'E': // exit
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(exitOpen, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'e': // exit
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(exitClosed, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'P': // pit
 					g.drawImage(pit, j * 40, i * 40, null);
@@ -190,6 +252,22 @@ public class GamePanel extends JPanel implements KeyListener {
 					break;
 				case 'S': // SWITCH
 					g.drawImage(weight, j * 40, i * 40, null);
+					Image Paint3 = null;
+					switch (((Switch)this.gameField.getCell(j, i)).getID()) {
+						case 5:
+							Paint3 = pinkSwitch;
+							break;
+						case 4: 
+							Paint3 = greenSwitch;
+							break;
+						case 3:
+							Paint3 = blueSwitch;
+							break;
+						default: 
+							Paint3 = weight;
+							break;
+					}
+					g.drawImage(Paint3, j * 40, i * 40, null);
 					if (!((Switch) this.gameField.getCell(j, i)).isEmpty())
 						g.drawImage(smallBox, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
