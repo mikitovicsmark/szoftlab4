@@ -67,10 +67,7 @@ public class Replicator extends Player implements Moving{
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (field.getReplicator() == null){
-                    timer.cancel();
-                }
-                else{
+                if (field.getReplicator() != null) {	
                     //create random direction and move
                     int replicatorX = field.getReplicator().getPosition().getX();
                     int replicatorY = field.getReplicator().getPosition().getY();
