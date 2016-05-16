@@ -396,22 +396,26 @@ public class GamePanel extends JPanel implements KeyListener {
 			gameField.getJaffa().shootSecondPortal(Color.GREEN);
 			break;
 		case 's':
-			if (playerY < gameField.getHeight() - 1) {
+			if (playerY < gameField.getHeight() - 1 &&
+					gameField.getCell(playerX, playerY + 1) != gameField.getJaffa().getPosition()) {
 				gameField.getPlayer().moveTo(gameField.getCell(playerX, playerY + 1), Direction.DOWN);
 			}
 			break;
 		case 'a':
-			if (playerX > 0) {
+			if (playerX > 0 &&
+					gameField.getCell(playerX-1, playerY) != gameField.getJaffa().getPosition()) {
 				gameField.getPlayer().moveTo(gameField.getCell(playerX - 1, playerY), Direction.LEFT);
 			}
 			break;
 		case 'w':
-			if (playerY > 0) {
+			if (playerY > 0 &&
+					gameField.getCell(playerX, playerY -1) != gameField.getJaffa().getPosition()) {
 				gameField.getPlayer().moveTo(gameField.getCell(playerX, playerY - 1), Direction.UP);
 			}
 			break;
 		case 'd':
-			if (playerX < gameField.getWidth() - 1) {
+			if (playerX < gameField.getWidth() - 1 &&
+					gameField.getCell(playerX+1, playerY) != gameField.getJaffa().getPosition()) {
 				gameField.getPlayer().moveTo(gameField.getCell(playerX + 1, playerY), Direction.RIGHT);
 			}
 			break;
@@ -501,22 +505,26 @@ public class GamePanel extends JPanel implements KeyListener {
 		}
 		switch(e.getKeyCode()){
 			case KeyEvent.VK_UP:
-				if (jaffaY > 0) {
+				if (jaffaY > 0 &&
+						gameField.getCell(jaffaX, jaffaY-1) != gameField.getPlayer().getPosition()) {
 					gameField.getJaffa().moveTo(gameField.getCell(jaffaX, jaffaY - 1), Direction.UP);
 				}
 				break;
 			case KeyEvent.VK_DOWN:
-				if (jaffaY < gameField.getHeight() - 1) {
+				if (jaffaY < gameField.getHeight() - 1 &&
+						gameField.getCell(jaffaX, jaffaY+1) != gameField.getPlayer().getPosition()) {
 					gameField.getJaffa().moveTo(gameField.getCell(jaffaX, jaffaY + 1), Direction.DOWN);
 				}
 				break;
 			case KeyEvent.VK_RIGHT:
-				if (jaffaX < gameField.getWidth() - 1) {
+				if (jaffaX < gameField.getWidth() - 1 &&
+						gameField.getCell(jaffaX+1, jaffaY) != gameField.getPlayer().getPosition()) {
 					gameField.getJaffa().moveTo(gameField.getCell(jaffaX + 1, jaffaY), Direction.RIGHT);
 				}
 				break;
 			case KeyEvent.VK_LEFT:
-				if (jaffaX > 0) {
+				if (jaffaX > 0 &&
+						gameField.getCell(jaffaX-1, jaffaY) != gameField.getPlayer().getPosition()) {
 					gameField.getJaffa().moveTo(gameField.getCell(jaffaX - 1, jaffaY), Direction.LEFT);
 				}
 				break;
