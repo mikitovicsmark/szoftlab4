@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import enums.Color;
 import enums.Direction;
 import gameElements.NormalFloor;
+import main.GameField;
 
 public class Game {
 	
