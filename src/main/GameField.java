@@ -225,11 +225,13 @@ public class GameField {
 			int randomx = random.nextInt(this.width);
 			int randomy = random.nextInt(this.height);
 			Cell tempCell = this.getCell(randomx, randomy);
-			if (tempCell instanceof NormalFloor) {
-				((NormalFloor) tempCell).addZPM();
-				spawnedRandomZPM = true;
-				this.zpmCount++;
-				System.out.println(this.zpmCount);
+			if (tempCell instanceof NormalFloor && !(tempCell instanceof Switch) &&!(tempCell instanceof Pit)) {
+				if (!((NormalFloor) tempCell).hasZPM()){
+					((NormalFloor) tempCell).addZPM();
+					spawnedRandomZPM = true;
+					this.zpmCount++;
+					System.out.println(this.zpmCount);
+				}
 			}
 		}
 		
