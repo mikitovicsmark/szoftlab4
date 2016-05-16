@@ -32,7 +32,8 @@ public class GamePanel extends JPanel implements KeyListener {
 			bluePortalRIGHT, yellowPortal, yellowPortalUP, bluePortalUP, bluePortalDOWN, bluePortalLEFT,
 			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox, pinkSwitch, pinkDoorClosed,
 			pinkDoorOpen, blueSwitch, blueDoorClosed, blueDoorOpen, greenSwitch, greenDoorClosed, greenDoorOpen, 
-			player1UP, player1RIGHT, player1DOWN, player1LEFT;
+			player1UP, player1RIGHT, player1DOWN, player1LEFT,
+			player2UP, player2DOWN, player2LEFT, player2RIGHT;
 
 	private GameField gameField;
 
@@ -61,10 +62,10 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.yellowPortalRIGHT = ImageIO.read(new File("src/images/specialwallOrangePortalRight.png"));
 			this.yellowPortalUP = ImageIO.read(new File("src/images/specialwallOrangePortalTop.png"));
 			this.yellowPortalDOWN = ImageIO.read(new File("src/images/specialwallOrangePortalDown.png"));
-			this.redPortalUP = ImageIO.read(new File("src/images/specialwallRedPortalTop.png"));
-			this.redPortalDOWN = ImageIO.read(new File("src/images/specialwallRedPortalDown.png"));
-			this.redPortalLEFT = ImageIO.read(new File("src/images/specialwallRedPortalLeft.png"));
-			this.redPortalRIGHT = ImageIO.read(new File("src/images/specialwallRedPortalRight.png"));
+			this.redPortalUP = ImageIO.read(new File("src/images/specialwallPinkPortalTop.png"));
+			this.redPortalDOWN = ImageIO.read(new File("src/images/specialwallPinkPortalDown.png"));
+			this.redPortalLEFT = ImageIO.read(new File("src/images/specialwallPinkPortalLeft.png"));
+			this.redPortalRIGHT = ImageIO.read(new File("src/images/specialwallPinkPortalRight.png"));
 			this.greenPortalUP = ImageIO.read(new File("src/images/specialwallGreenPortalTop.png"));
 			this.greenPortalDOWN = ImageIO.read(new File("src/images/specialwallGreenPortalDown.png"));
 			this.greenPortalLEFT = ImageIO.read(new File("src/images/specialwallGreenPortalLeft.png"));
@@ -83,6 +84,10 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.player1DOWN = ImageIO.read(new File("src/images/player1Down.png"));
 			this.player1LEFT = ImageIO.read(new File("src/images/player1Left.png"));
 			this.player1RIGHT = ImageIO.read(new File("src/images/player1Right.png"));
+			this.player2UP = ImageIO.read(new File("src/images/player2Up.png"));
+			this.player2DOWN = ImageIO.read(new File("src/images/player2Down.png"));
+			this.player2LEFT = ImageIO.read(new File("src/images/player2Left.png"));
+			this.player2RIGHT = ImageIO.read(new File("src/images/player2Right.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -90,7 +95,7 @@ public class GamePanel extends JPanel implements KeyListener {
 		//
 	}
 	
-	public Image playerDir(Player player){
+	public Image getPlayerDir(){
 	Image paint4 = oneill;
 	switch (this.gameField.player.getDirection()) {
 		case UP:
@@ -107,6 +112,21 @@ public class GamePanel extends JPanel implements KeyListener {
 		break;
 		}
 		return paint4;
+	}
+
+	public Image getJaffaDir(){
+		switch (this.gameField.jaffa.getDirection()){
+			case UP:
+				return player2UP;
+			case  LEFT:
+				return player2LEFT;
+			case RIGHT:
+				return player2RIGHT;
+			case DOWN:
+				return player2DOWN;
+			default:
+				return player2LEFT;
+		}
 	}
 	
 	public void paint(Graphics g) {
@@ -135,14 +155,14 @@ public class GamePanel extends JPanel implements KeyListener {
 					}
 					g.drawImage(Paint, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
-						Image playerDirection = playerDir(this.gameField.getPlayer());
+						Image playerDirection = getPlayerDir();
 						g.drawImage(playerDirection, j * 40, i * 40, null);
 					} else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
 						g.drawImage(replicator, j * 40, i * 40, null);
 					}
 					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
-						g.drawImage(jaffa, j*40, i*40, null);
+						g.drawImage(getJaffaDir(), j*40, i*40, null);
 					}
 					break;
 				case 'd': // closed door
@@ -185,11 +205,11 @@ public class GamePanel extends JPanel implements KeyListener {
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(smallBox, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
-						Image playerDirection = playerDir(this.gameField.getPlayer());
+						Image playerDirection = getPlayerDir();
 						g.drawImage(playerDirection, j * 40, i * 40, null);
 					}
 					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
-							g.drawImage(jaffa, j*40, i*40, null);
+							g.drawImage(getJaffaDir(), j*40, i*40, null);
 					}
 					else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
@@ -218,7 +238,7 @@ public class GamePanel extends JPanel implements KeyListener {
 				case '.': // normalfloor
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
-						Image playerDirection = playerDir(this.gameField.getPlayer());
+						Image playerDirection = getPlayerDir();
 						g.drawImage(playerDirection, j * 40, i * 40, null);
 					}
 					else if (gameField.replicator != null
@@ -226,7 +246,7 @@ public class GamePanel extends JPanel implements KeyListener {
 						g.drawImage(replicator, j * 40, i * 40, null);
 					}
 					else if (gameField.getCell(j,i) == gameField.jaffa.getPosition()) {
-						g.drawImage(jaffa, j*40, i*40, null);
+						g.drawImage(getJaffaDir(), j*40, i*40, null);
 					}
 					break;
 				case '|': // wall
@@ -334,14 +354,14 @@ public class GamePanel extends JPanel implements KeyListener {
 					if (!((Switch) this.gameField.getCell(j, i)).isEmpty())
 						g.drawImage(smallBox, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
-						Image playerDirection = playerDir(this.gameField.getPlayer());
+						Image playerDirection = getPlayerDir();
 						g.drawImage(playerDirection, j * 40, i * 40, null);
 					} else if (gameField.replicator != null
 							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
 						g.drawImage(replicator, j * 40, i * 40, null);
 					}
 					else if (this.gameField.getCell(j,i) == gameField.jaffa.getPosition()){
-						g.drawImage(jaffa, j*40, i*40, null);
+						g.drawImage(getJaffaDir(), j*40, i*40, null);
 					}
 					break;
 				default:
