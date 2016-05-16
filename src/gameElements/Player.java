@@ -83,12 +83,14 @@ public class Player implements Moving {
 		this.zpmCount = 0;
 		this.dir = Direction.RIGHT;
 	}
-
+Color temp;
 	public void shootFirstPortal(Color col) {
 		Portal tmpPortal = shootPortal(dir, col);
-		if (tmpPortal != null) {
+		if (tmpPortal != null && temp != col) {
 			if (firstPortal != null) {
 				firstPortal.getLocation().setPortal(null);
+				firstPortal.setPortsTo(firstPortal);
+				temp = col;
 			}
 			firstPortal = tmpPortal;
 			if (secondPortal != null) {
@@ -100,9 +102,11 @@ public class Player implements Moving {
 
 	public void shootSecondPortal(Color col) {
 		Portal tmpPortal = shootPortal(dir, col);
-		if (tmpPortal != null) {
+		if (tmpPortal != null && temp != col) {
 			if (secondPortal != null) {
 				secondPortal.getLocation().setPortal(null);
+				secondPortal.setPortsTo(secondPortal);
+				temp = col;
 			}
 			secondPortal = tmpPortal;
 			if (firstPortal != null) {
