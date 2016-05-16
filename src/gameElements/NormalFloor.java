@@ -55,5 +55,8 @@ public class NormalFloor extends Cell implements Interactable {
 		this.zpm = new Zpm(this.getX(), this.getY());
 		this.setImage('Z');
 	}
+	public boolean hasZPM(){
+		return zpm!=null;
+	}
 
 }
