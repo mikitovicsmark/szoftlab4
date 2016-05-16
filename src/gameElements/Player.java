@@ -89,6 +89,7 @@ public class Player implements Moving {
 		if (tmpPortal != null) {
 			if (firstPortal != null) {
 				firstPortal.getLocation().setPortal(null);
+				firstPortal.setPortsTo(firstPortal);
 			}
 			firstPortal = tmpPortal;
 			if (secondPortal != null) {
@@ -103,6 +104,7 @@ public class Player implements Moving {
 		if (tmpPortal != null) {
 			if (secondPortal != null) {
 				secondPortal.getLocation().setPortal(null);
+				secondPortal.setPortsTo(secondPortal);
 			}
 			secondPortal = tmpPortal;
 			if (firstPortal != null) {
