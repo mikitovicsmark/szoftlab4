@@ -27,7 +27,7 @@ public class Game {
 		frame.setLayout(new BorderLayout());
 		GamePanel gamePanel = null;
 		gamePanel = new GamePanel();
-		
+		/*
 		frame.add(mymenu,BorderLayout.CENTER);
 		frame.pack();
 		frame.addKeyListener(mymenu);
@@ -35,9 +35,9 @@ public class Game {
 		frame.setVisible(true);
 		while(!exit){
 			mymenu.repaint();
-		}
+		}*/
 		
-		/*
+		
 		frame.add(gamePanel, BorderLayout.CENTER);
 	    frame.pack();
 	    frame.addKeyListener(gamePanel);
@@ -52,7 +52,7 @@ public class Game {
 				gamePanel.setGameField(gameField);
 				gamePanel.repaint();
 			}
-		}*/
+		}
 		
 		scanner.close();
 
