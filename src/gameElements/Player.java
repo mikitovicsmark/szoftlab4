@@ -33,6 +33,10 @@ public class Player implements Moving {
 		return zpmCount;
 	}
 
+	public Direction getDirection(){
+		return dir;
+	}
+	
 	public void setSecondPortal(Portal secp) {// for testing purposes
 		secondPortal = secp;
 	}
@@ -89,6 +93,7 @@ public class Player implements Moving {
 		if (tmpPortal != null) {
 			if (firstPortal != null) {
 				firstPortal.getLocation().setPortal(null);
+				firstPortal.setPortsTo(firstPortal);
 			}
 			firstPortal = tmpPortal;
 			if (secondPortal != null) {
@@ -103,6 +108,7 @@ public class Player implements Moving {
 		if (tmpPortal != null) {
 			if (secondPortal != null) {
 				secondPortal.getLocation().setPortal(null);
+				secondPortal.setPortsTo(secondPortal);
 			}
 			secondPortal = tmpPortal;
 			if (firstPortal != null) {
@@ -150,8 +156,13 @@ public class Player implements Moving {
 					canGoFurther = false;
 				}
 			}
-			if (cell instanceof Wall) {
+			if (cell instanceof Wall && !(cell instanceof Door)) {
 				canGoFurther = false;
+			}
+			if (cell instanceof Door){
+				if (!((Door) cell).isPassable()){
+					canGoFurther=false;
+				}
 			}
 		}
 
@@ -163,24 +174,26 @@ public class Player implements Moving {
 		}
 
 		if (cell instanceof SpecialWall) {
-			cell = (SpecialWall) cell;
-			switch (dir) {
-			case DOWN:
-				portalDir = Direction.UP;
-				break;
-			case LEFT:
-				portalDir = Direction.RIGHT;
-				break;
-			case RIGHT:
-				portalDir = Direction.LEFT;
-				break;
-			case UP:
-				portalDir = Direction.DOWN;
-				break;
+			if (!((SpecialWall) cell).hasPortal()) {
+				cell = (SpecialWall) cell;
+				switch (dir) {
+				case DOWN:
+					portalDir = Direction.UP;
+					break;
+				case LEFT:
+					portalDir = Direction.RIGHT;
+					break;
+				case RIGHT:
+					portalDir = Direction.LEFT;
+					break;
+				case UP:
+					portalDir = Direction.DOWN;
+					break;
+				}
+				Portal newPortal = new Portal(portalDir, col, (SpecialWall) cell);
+				((SpecialWall) cell).setPortal(newPortal);
+				return newPortal;
 			}
-			Portal newPortal = new Portal(portalDir, col, (SpecialWall) cell);
-			((SpecialWall) cell).setPortal(newPortal);
-			return newPortal;
 		}
 		return null;
 	}
@@ -204,11 +217,14 @@ public class Player implements Moving {
 		} else {
 			wasOnSwitch = false;
 		}
-		this.field.print();
+		//this.field.print();
 	}
 
 	public void pickUpZpm() {
 		zpmCount++;
+		if (zpmCount%2==0) {
+			field.spawnRandomZPM();
+		}
 		field.zpmPickedUp();
 	}
 

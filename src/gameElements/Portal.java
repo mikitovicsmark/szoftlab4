@@ -37,7 +37,7 @@ public class Portal {
 		direction = dir;
 		color = col;
 		location = wall;
-		System.out.println("Portal created at "+wall.getX()+","+wall.getY()+" facing "+dir);
+		//System.out.println("Portal created at "+wall.getX()+","+wall.getY()+" facing "+dir);
 	}
 
 	public Cell getWhereYouComeOut(Player player) {
@@ -61,11 +61,11 @@ public class Portal {
 			x += portsTo.getLocation().getX();
 			y += portsTo.getLocation().getY();
 
-			System.out.println("Should go to "+x+","+y);
-			System.out.println("Because direction is "+portsTo.getDirection());
+			//System.out.println("Should go to "+x+","+y);
+			//System.out.println("Because direction is "+portsTo.getDirection());
 			return player.getField().getCell(x, y);
 		}
-		System.out.println("No target found");
+		//System.out.println("No target found");
 		return null;
 	}
 }
