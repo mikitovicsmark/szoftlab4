@@ -150,7 +150,7 @@ public class Player implements Moving {
 					canGoFurther = false;
 				}
 			}
-			if (cell instanceof Wall) {
+			if (cell instanceof Wall && !(cell instanceof Door)) {
 				canGoFurther = false;
 			}
 		}
@@ -211,6 +211,9 @@ public class Player implements Moving {
 
 	public void pickUpZpm() {
 		zpmCount++;
+		if (zpmCount%2==0) {
+			field.spawnRandomZPM();
+		}
 		field.zpmPickedUp();
 	}
 
