@@ -16,7 +16,7 @@ public class Serializer {
 		switch (level) {
 		//cases for test maps
 		case 0:
-			levelPath = "/testmap";
+			levelPath = "/level10";
 			break;
 		case 13:
 			levelPath = "/testmap13";
