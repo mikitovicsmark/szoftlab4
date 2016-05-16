@@ -26,7 +26,9 @@ public class GamePanel extends JPanel implements KeyListener {
 	private static final long serialVersionUID = 6644375181764124582L;
 
 	private Image weight, openDoor, zpm, box, exitOpen, exitClosed, pit, normalFloor, wall, specialWall, replicator,
-			oneill, jaffa, bluePortalUP, bluePortalDOWN, bluePortalLEFT, bluePortalRIGHT, yellowPortal, yellowPortalUP,
+			oneill, jaffa, redPortalUP, redPortalDOWN, redPortalLEFT, redPortalRIGHT,
+			greenPortalUP, greenPortalDOWN, greenPortalLEFT, greenPortalRIGHT,
+			bluePortalRIGHT, yellowPortal, yellowPortalUP, bluePortalUP, bluePortalDOWN, bluePortalLEFT,
 			yellowPortalDOWN, yellowPortalLEFT, yellowPortalRIGHT, closedDoor, smallBox, pinkSwitch, pinkDoorClosed,
 			pinkDoorOpen, blueSwitch, blueDoorClosed, blueDoorOpen, greenSwitch, greenDoorClosed, greenDoorOpen;
 
@@ -57,6 +59,14 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.yellowPortalRIGHT = ImageIO.read(new File("src/images/specialwallOrangePortalRight.png"));
 			this.yellowPortalUP = ImageIO.read(new File("src/images/specialwallOrangePortalTop.png"));
 			this.yellowPortalDOWN = ImageIO.read(new File("src/images/specialwallOrangePortalDown.png"));
+			this.redPortalUP = ImageIO.read(new File("src/images/specialwallRedPortalTop.png"));
+			this.redPortalDOWN = ImageIO.read(new File("src/images/specialwallRedPortalDown.png"));
+			this.redPortalLEFT = ImageIO.read(new File("src/images/specialwallRedPortalLeft.png"));
+			this.redPortalRIGHT = ImageIO.read(new File("src/images/specialwallRedPortalRight.png"));
+			this.greenPortalUP = ImageIO.read(new File("src/images/specialwallGreenPortalTop.png"));
+			this.greenPortalDOWN = ImageIO.read(new File("src/images/specialwallGreenPortalDown.png"));
+			this.greenPortalLEFT = ImageIO.read(new File("src/images/specialwallGreenPortalLeft.png"));
+			this.greenPortalRIGHT = ImageIO.read(new File("src/images/specialwallGreenPortalRight.png"));
 			this.smallBox = ImageIO.read(new File("src/images/boxsmall.png"));
 			this.pinkSwitch = ImageIO.read(new File("src/images/pinkswitch.png"));
 			this.pinkDoorClosed = ImageIO.read(new File("src/images/pinkdoorclosedwithwall.png"));
@@ -214,7 +224,7 @@ public class GamePanel extends JPanel implements KeyListener {
 				case 'O': // Oneill
 					g.drawImage(oneill, j * 40, i * 40, null);
 					break;
-				case 'T': // Portal
+				case 'T': // Oneills Portal
 					g.drawImage(specialWall, j * 40, i * 40, null);
 					Portal tempPortal = ((SpecialWall) this.gameField.getCell(j, i)).getPortal();
 					Image toPaint = null;
@@ -225,12 +235,24 @@ public class GamePanel extends JPanel implements KeyListener {
 						} else if (tempPortal.getColor() == Color.YELLOW) {
 							toPaint = yellowPortalUP;
 						}
+						else if (tempPortal.getColor() == Color.RED){
+							toPaint = redPortalUP;
+						}
+						else if (tempPortal.getColor() == Color.GREEN){
+							toPaint = greenPortalUP;
+						}
 						break;
 					case DOWN:
 						if (tempPortal.getColor() == Color.BLUE) {
 							toPaint = bluePortalDOWN;
 						} else if (tempPortal.getColor() == Color.YELLOW) {
 							toPaint = yellowPortalDOWN;
+						}
+						else if (tempPortal.getColor() == Color.RED) {
+							toPaint = redPortalDOWN;
+						}
+						else if (tempPortal.getColor() == Color.GREEN){
+							toPaint = greenPortalDOWN;
 						}
 						break;
 					case LEFT:
@@ -239,12 +261,24 @@ public class GamePanel extends JPanel implements KeyListener {
 						} else if (tempPortal.getColor() == Color.YELLOW) {
 							toPaint = yellowPortalLEFT;
 						}
+						else if (tempPortal.getColor() == Color.RED){
+							toPaint = redPortalLEFT;
+						}
+						else if (tempPortal.getColor() == Color.GREEN){
+							toPaint = greenPortalLEFT;
+						}
 						break;
 					case RIGHT:
 						if (tempPortal.getColor() == Color.BLUE) {
 							toPaint = bluePortalRIGHT;
 						} else if (tempPortal.getColor() == Color.YELLOW) {
 							toPaint = yellowPortalRIGHT;
+						}
+						else if (tempPortal.getColor() == Color.RED){
+							toPaint = redPortalRIGHT;
+						}
+						else if (tempPortal.getColor() == Color.GREEN){
+							toPaint = greenPortalRIGHT;
 						}
 						break;
 					}
