@@ -2,6 +2,7 @@ package main;
  
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import enums.Color;
 import enums.Direction;
@@ -214,4 +215,21 @@ public class GameField {
             exit.openExit();
         }  
     }
+
+	public void spawnRandomZPM() {
+		Random random = new Random();	
+		boolean spawnedRandomZPM = false;
+		while(!spawnedRandomZPM) {
+			int randomx = random.nextInt(this.width);
+			int randomy = random.nextInt(this.height);
+			Cell tempCell = this.getCell(randomx, randomy);
+			if (tempCell instanceof NormalFloor) {
+				((NormalFloor) tempCell).addZPM();
+				spawnedRandomZPM = true;
+				this.zpmCount++;
+				System.out.println(this.zpmCount);
+			}
+		}
+		
+	}
 }
