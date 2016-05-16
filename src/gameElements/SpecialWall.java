@@ -73,4 +73,7 @@ public class SpecialWall extends Wall {
 				|| dir == Direction.RIGHT && portal.getDirection() == Direction.LEFT
 				|| dir == Direction.UP && portal.getDirection() == Direction.DOWN;
 	}
+	public boolean hasPortal(){
+		return portal!=null;
+	}
 }
