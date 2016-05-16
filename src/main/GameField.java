@@ -6,24 +6,13 @@ import java.util.Random;
 
 import enums.Color;
 import enums.Direction;
-import gameElements.Box;
-import gameElements.Cell;
-import gameElements.Door;
-import gameElements.Exit;
-import gameElements.NormalFloor;
-import gameElements.Pit;
-import gameElements.Player;
-import gameElements.Portal;
-import gameElements.Replicator;
-import gameElements.SpecialWall;
-import gameElements.Switch;
-import gameElements.Wall;
-import gameElements.Zpm;
- 
+import gameElements.*;
+
 public class GameField {
 	Replicator replicator;
     private int level;
     Player player;
+    Player jaffa;
     private List<List<Cell>> cells = new ArrayList<List<Cell>>();
     private int height;
     private int width;
@@ -59,6 +48,9 @@ public class GameField {
 				if (cell == this.player.getPosition()) {
 					System.out.print(this.player.getImage());
 				}
+                else if (cell == this.jaffa.getPosition()) {
+                    System.out.print(this.jaffa.getImage());
+                }
 				else if (this.replicator != null && cell == this.replicator.getPosition()){
 					System.out.print(this.replicator.getImage());
 				}
@@ -74,6 +66,8 @@ public class GameField {
     public Player getPlayer() {
         return player;
     }
+
+    public Player getJaffa(){ return jaffa; }
  
     public void setPlayer(Player player) {
         this.player = player;
@@ -110,7 +104,7 @@ public class GameField {
                     realX++;
                     break;
                 case 'B':
-                    line.add(new NormalFloor(realX, realY, new Box(realX, realY, 5))); // TODO change from fix 5 weight for box
+                    line.add(new NormalFloor(realX, realY, new Box(realX, realY, 1))); 
                     realX++;
                     break;
                 case 'E':
@@ -150,7 +144,15 @@ public class GameField {
                     this.player.setField(this);
                     line.add(floor);
                     realX++;
-		    break;
+		            break;
+                case 'J':
+                    Cell floor3 = new NormalFloor(realX, realY, null);
+                    this.jaffa = new Jaffa(floor3);
+                    this.jaffa.setPosition(floor3);
+                    this.jaffa.setField(this);
+                    line.add(floor3);
+                    realX++;
+                    break;
 		case 'K': //BLUE Portal
 		    SpecialWall sp1 = new SpecialWall(realX, realY);
 		    Portal kportal = new Portal(Direction.LEFT,Color.BLUE,sp1);//NOTE: default direction is LEFT, you need to change in the tests
