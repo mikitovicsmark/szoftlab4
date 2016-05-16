@@ -150,7 +150,7 @@ public class Player implements Moving {
 					canGoFurther = false;
 				}
 			}
-			if (cell instanceof Wall) {
+			if (cell instanceof Wall && !(cell instanceof Door)) {
 				canGoFurther = false;
 			}
 		}
@@ -163,24 +163,26 @@ public class Player implements Moving {
 		}
 
 		if (cell instanceof SpecialWall) {
-			cell = (SpecialWall) cell;
-			switch (dir) {
-			case DOWN:
-				portalDir = Direction.UP;
-				break;
-			case LEFT:
-				portalDir = Direction.RIGHT;
-				break;
-			case RIGHT:
-				portalDir = Direction.LEFT;
-				break;
-			case UP:
-				portalDir = Direction.DOWN;
-				break;
+			if (!((SpecialWall) cell).hasPortal()) {
+				cell = (SpecialWall) cell;
+				switch (dir) {
+				case DOWN:
+					portalDir = Direction.UP;
+					break;
+				case LEFT:
+					portalDir = Direction.RIGHT;
+					break;
+				case RIGHT:
+					portalDir = Direction.LEFT;
+					break;
+				case UP:
+					portalDir = Direction.DOWN;
+					break;
+				}
+				Portal newPortal = new Portal(portalDir, col, (SpecialWall) cell);
+				((SpecialWall) cell).setPortal(newPortal);
+				return newPortal;
 			}
-			Portal newPortal = new Portal(portalDir, col, (SpecialWall) cell);
-			((SpecialWall) cell).setPortal(newPortal);
-			return newPortal;
 		}
 		return null;
 	}
@@ -209,6 +211,9 @@ public class Player implements Moving {
 
 	public void pickUpZpm() {
 		zpmCount++;
+		if (zpmCount%2==0) {
+			field.spawnRandomZPM();
+		}
 		field.zpmPickedUp();
 	}
 

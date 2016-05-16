@@ -39,7 +39,7 @@ public class GamePanel extends JPanel implements KeyListener {
 			this.zpm = ImageIO.read(new File("src/images/zpm.png"));
 			this.box = ImageIO.read(new File("src/images/box.png"));
 			this.exitClosed = ImageIO.read(new File("src/images/exit_closed.png"));
-			this.exitOpen = ImageIO.read(new File("src/images/exit_closed.png"));
+			this.exitOpen = ImageIO.read(new File("src/images/exit_open.png"));
 			this.pit = ImageIO.read(new File("src/images/pit.png"));
 			this.normalFloor = ImageIO.read(new File("src/images/floor.png"));
 			this.wall = ImageIO.read(new File("src/images/wall.png"));
@@ -74,11 +74,18 @@ public class GamePanel extends JPanel implements KeyListener {
 					g.drawImage(openDoor, j * 40, i * 40, null);
 					if (this.gameField.getCell(j, i) == gameField.player.getPosition()) {
 						g.drawImage(oneill, j * 40, i * 40, null);
+					} else if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
 					}
 					break;
 				case 'd': // closed door
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(closedDoor, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'Z': // zpm
 					g.drawImage(normalFloor, j * 40, i * 40, null);
@@ -97,13 +104,21 @@ public class GamePanel extends JPanel implements KeyListener {
 						g.drawImage(replicator, j * 40, i * 40, null);
 					}
 					break;
-				case 'E': // exit
+				case 'E': // exit open
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(exitOpen, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
-				case 'e': // exit
+				case 'e': // exit closed
 					g.drawImage(normalFloor, j * 40, i * 40, null);
 					g.drawImage(exitClosed, j * 40, i * 40, null);
+					if (gameField.replicator != null
+							&& this.gameField.getCell(j, i) == gameField.replicator.getPosition()) {
+						g.drawImage(replicator, j * 40, i * 40, null);
+					}
 					break;
 				case 'P': // pit
 					g.drawImage(pit, j * 40, i * 40, null);
