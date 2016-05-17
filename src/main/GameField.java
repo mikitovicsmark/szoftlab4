@@ -10,7 +10,7 @@ import gameElements.*;
 
 public class GameField {
 	Replicator replicator;
-    public static int level;
+    private int level;
     Player player;
     Player jaffa;
     private List<List<Cell>> cells = new ArrayList<List<Cell>>();
@@ -243,5 +243,10 @@ public class GameField {
 			}
 		}
 		
+	}
+
+	public int Getlevel() {
+		
+		return level;
 	}
 }

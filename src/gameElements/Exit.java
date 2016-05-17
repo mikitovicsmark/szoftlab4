@@ -14,7 +14,7 @@ public class Exit extends Wall {
 	public boolean interact(Player player, Direction dir){
 		if(super.interact(player, dir)){
 			player.kill();
-		    if(GameField.level==30){
+		    if(player.getField().Getlevel()==30){
 		    	Game.exit=true;	
 		    }
 			player.getField().loadNextLevel();
