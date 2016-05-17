@@ -245,8 +245,7 @@ public class GameField {
 		
 	}
 
-	public int Getlevel() {
-		
+	public int getlevel() {
 		return level;
 	}
 }
