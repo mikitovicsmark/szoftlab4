@@ -200,6 +200,9 @@ public class GameField {
  
     public void loadNextLevel() {
         level++;
+        if(level>30){
+        	level=21;
+        }
         Initialize(level);
     }
  
