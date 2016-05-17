@@ -436,13 +436,12 @@ public class GamePanel extends JPanel implements KeyListener {
 				gameField.getPlayer().moveTo(gameField.getCell(playerX + 1, playerY), Direction.RIGHT);
 			}
 			break;
-		// Pressing the F key on a NormalFloor that has a Box on it results in
+		// Pressing the F key on a NormalFloor or Switch that has a Box on it results in
 		// the player picking it up
 		// If the player has a box and is standing on an empty NormalFloor the
 		// box will be placed on the floor
 		case 'f':
-			// Checking if the current Cell is a NormalFloor, otherwise moving
-			// on to break
+			// Checking if the current Cell is a Switch
 			if (gameField.getCell(playerX, playerY) instanceof Switch) {
 				if (gameField.getPlayer().getBox() == null) {
 					if (!((Switch) gameField.getCell(playerX, playerY)).isEmpty()) {
@@ -451,7 +450,7 @@ public class GamePanel extends JPanel implements KeyListener {
 						gameField.getPlayer().setBox(((Switch) gameField.getCell(playerX, playerY)).pickUpBox());
 					}
 				} else {
-					// If the NormalFloor has no box on it, the current box is
+					// If the Switch has no box on it, the current box is
 					// placed then removed from the player's inventory
 					if (gameField.getPlayer().getBox() != null) {
 						((Switch) gameField.getCell(playerX, playerY)).putDownBox(gameField.getPlayer().getBox());
@@ -481,8 +480,7 @@ public class GamePanel extends JPanel implements KeyListener {
 			break;
 		//Box interacts with Jaffa(player2), same as with Player
 		case ',':
-			// Checking if the current Cell is a NormalFloor, otherwise moving
-			// on to break
+			// Checking if the current Cell is a Switch
 			if (gameField.getCell(jaffaX, jaffaY) instanceof Switch) {
 				if (gameField.getJaffa().getBox() == null) {
 					if (!((Switch) gameField.getCell(jaffaX, jaffaY)).isEmpty()) {
@@ -491,7 +489,7 @@ public class GamePanel extends JPanel implements KeyListener {
 						gameField.getJaffa().setBox(((Switch) gameField.getCell(jaffaX, jaffaY)).pickUpBox());
 					}
 				} else {
-					// If the NormalFloor has no box on it, the current box is
+					// If the Switch has no box on it, the current box is
 					// placed then removed from the player's inventory
 					if (gameField.getJaffa().getBox() != null) {
 						((Switch) gameField.getCell(jaffaX, jaffaY)).putDownBox(gameField.getJaffa().getBox());
@@ -545,6 +543,8 @@ public class GamePanel extends JPanel implements KeyListener {
 					gameField.getJaffa().moveTo(gameField.getCell(jaffaX - 1, jaffaY), Direction.LEFT);
 				}
 				break;
+			case KeyEvent.VK_ESCAPE:
+				Game.exit=true;
 		}
 
 	}
