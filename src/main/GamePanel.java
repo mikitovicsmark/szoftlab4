@@ -372,11 +372,16 @@ public class GamePanel extends JPanel implements KeyListener {
 				}
 			}
 		}
-		g.setColor(java.awt.Color.CYAN);
-		g.setFont(new Font("Arial", Font.PLAIN, 18));
-		g.drawString("O'Neil zpm: " + gameField.getPlayer().getZpmCount(), 100, 25);
-		g.setColor(java.awt.Color.GREEN);
-		g.drawString("Jaffa zpm: " + gameField.getJaffa().getZpmCount(), 250, 25);
+		try {
+			g.setColor(java.awt.Color.CYAN);
+			g.setFont(new Font("Arial", Font.PLAIN, 18));
+			g.drawString("O'Neil zpm: " + gameField.getPlayer().getZpmCount(), 100, 25);
+			g.setColor(java.awt.Color.GREEN);
+			g.drawString("Jaffa zpm: " + gameField.getJaffa().getZpmCount(), 250, 25);
+		} catch  (Exception e) {
+			
+		}
+		
 		
 	}
 

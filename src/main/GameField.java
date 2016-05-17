@@ -35,7 +35,12 @@ public class GameField {
 	}
 
 	public Cell getCell(int x, int y) {
-		return cells.get(y).get(x);
+		try {
+			return cells.get(y).get(x);
+		} catch (Exception e) {
+			return new Cell(100, 100);
+		}
+		
 	}
 
 	public void setCell(int x, int y, Cell cell){
