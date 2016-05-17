@@ -55,6 +55,9 @@ public class Menu extends JPanel implements KeyListener {
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode()==KeyEvent.VK_ESCAPE){
+			System.exit(0);
+		}
 		if (e.getKeyCode()==10){
 			this.needmenu = false;
 		}

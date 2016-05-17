@@ -15,59 +15,77 @@ import gameElements.NormalFloor;
 import main.GameField;
 
 public class Game {
-	
+	public static boolean exit;
+	private static JFrame frame;
+	private static Menu mymenu;
+	private static Scanner scanner;
+	private static GamePanel gamePanel;
+	private static GameField gameField;
+
 	public static void main(String[] args) {
-		
-		GameField gameField = new GameField();
-		//gameField.Initialize(0);
-		boolean exit = false;
-		Scanner scanner = new Scanner(System.in);
-		Menu mymenu = new Menu();
-		
-		//creating the panel holder frame
-		JFrame frame = new JFrame();
+		scanner = new Scanner(System.in);
+		gameField = new GameField();
+		exit = false;
+		mymenu = new Menu();
+
+		frame = new JFrame();
 		frame.setPreferredSize(new Dimension(800, 800));
 		frame.setLayout(new BorderLayout());
-		GamePanel gamePanel = null;
+		gamePanel = null;
 		gamePanel = new GamePanel();
-		
-		//showing the menu
-		frame.add(mymenu,BorderLayout.CENTER);
+		showMenu();
+		scanner.close();
+	}
+
+	public static void showMenu() {
+		frame.add(mymenu, BorderLayout.CENTER);
 		frame.pack();
 		frame.addKeyListener(mymenu);
 		frame.setFocusable(true);
 		frame.setVisible(true);
-		while(mymenu.needmenu){
+		while (mymenu.needmenu) {
 			mymenu.repaint();
 		}
-		//initializing the selected map
-		gameField.Initialize(mymenu.getSelectedMap()+20);
-		
-		//removing the menu panel
+		startGame();
+	}
+
+	public static void removeMenu() {
 		frame.setVisible(false);
 		frame.setFocusable(false);
 		frame.removeKeyListener(mymenu);
 		frame.remove(mymenu);
-		
-		
-		//showing the game panel
+	}
+
+	public static void removeGame() {
+		frame.setVisible(false);
+		frame.setFocusable(false);
+		frame.removeKeyListener(gamePanel);
+		frame.remove(gamePanel);
+	}
+
+	public static void startGame() {
+
+		gameField.Initialize(mymenu.getSelectedMap() + 20);
+		removeMenu();
 		frame.add(gamePanel, BorderLayout.CENTER);
 		frame.pack();
-	    frame.addKeyListener(gamePanel);
-	    frame.setFocusable(true);
-	    frame.setVisible(true);
-		
-		//random move of Replicator
-		gameField.getReplicator().randomMove();	
+		frame.addKeyListener(gamePanel);
+		frame.setFocusable(true);
+		frame.setVisible(true);
+
+		// random move of Replicator
+		gameField.getReplicator().randomMove();
 		while (!exit) {
-			if (gamePanel !=null) {
+			if (gamePanel != null) {
 				gamePanel.setGameField(gameField);
 				gamePanel.repaint();
 			}
 		}
-		
-		scanner.close();
 
+		mymenu.needmenu = true;
+		exit=false;
+		removeGame();
+		showMenu();
 	}
 
 }
